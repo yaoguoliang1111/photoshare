@@ -1,4 +1,6 @@
 <!--_meta 作为公共模版分离出去-->
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE HTML>
 <html>
 <head>
@@ -162,15 +164,15 @@
 		</div>
 		
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>分类栏目：</label>
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>相册类别：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<span class="select-box">
 				<select name="" class="select">
-					<option value="0">全部栏目</option>
-					<option value="1">新闻资讯</option>
-					<option value="11">├行业动态</option>
-					<option value="12">├行业资讯</option>
-					<option value="13">├行业新闻</option>
+					<option value="0">人像</option>
+					<option value="1">生活</option>
+					<option value="2">动物</option>
+					<option value="3">风景</option>
+					<option value="4">运动</option>
 				</select>
 				</span>
 			</div>
@@ -216,8 +218,7 @@
 		</div>
 		<div class="row cl">
 			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-				<button onClick="article_save_submit();" class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i> 保存并提交审核</button>
-				<button onClick="article_save();" class="btn btn-secondary radius" type="button"><i class="Hui-iconfont">&#xe632;</i> 保存草稿</button>
+				<button onClick="article_save_submit();" class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i>提交相册</button>
 				<button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
 			</div>
 		</div>
@@ -254,10 +255,10 @@ $(function(){
 
 	var uploader = WebUploader.create({
 		auto: true,
-		swf: 'lib/webuploader/0.1.5/Uploader.swf',
+		swf: '${pageContext.request.contextPath }/js/Uploader.swf',
 	
 		// 文件接收服务端。
-		server: 'http://lib.h-ui.net/webuploader/0.1.5/server/fileupload.php',
+		server: '${pageContext.request.contextPath }/FileUploadServlet',
 	
 		// 选择文件的按钮。可选。
 		// 内部根据当前运行是创建，可能是input元素，也可能是flash.
@@ -498,10 +499,10 @@ $(function(){
             },
             dnd: '#dndArea',
             paste: '#uploader',
-            swf: 'lib/webuploader/0.1.5/Uploader.swf',
+            swf: '${pageContext.request.contextPath }/js/Uploader.swf',
             chunked: false,
             chunkSize: 512 * 1024,
-            server: 'http://lib.h-ui.net/webuploader/0.1.5/server/fileupload.php',
+            server: '${pageContext.request.contextPath }/FileUploadServlet',
             // runtimeOrder: 'flash',
 
             // accept: {
