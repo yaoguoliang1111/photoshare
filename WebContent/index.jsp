@@ -229,6 +229,9 @@
                     <h1 class="title__h1 underscore">为您推荐</h1>
                 </div>
             </div>
+            <c:if test="${requestScope.page==null }">
+						<jsp:forward page="Album.do?op=photopage"></jsp:forward>
+			</c:if>
             <!-- END title 相册展示开始-->
             <div class="wrap wrap_gray pt20">
                 <div class="container">
