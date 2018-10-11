@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; utf-8"
     pageEncoding="utf-8"%>
+<%@ page autoFlush="true" buffer="1094kb"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -41,17 +42,7 @@
                         <!--Main Menu HTML Code-->
                         <nav class="wsmenu slideLeft clearfix">
                             <ul class="mobile-sub wsmenu-list">
-                                <li class="visible-xs">
-                                    <form class="navbar-form mob_search" role="search">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="Search">
-                                        </div>
-                                        <button type="submit" class="btn btn-search">
-                                            <i class="icon-search"></i>
-                                        </button>
-                                    </form>
-                                </li>
-
+                                
                                 <li class="active">
                                     <span class="wsmenu-click"></span>
                                     <a href="index.html">首页</a>
@@ -229,38 +220,45 @@
                     <h1 class="title__h1 underscore">为您推荐</h1>
                 </div>
             </div>
-            <c:if test="${requestScope.page==null }">
-						<jsp:forward page="Album.do?op=photopage"></jsp:forward>
-			</c:if>
+            
             <!-- END title 相册展示开始-->
             <div class="wrap wrap_gray pt20">
                 <div class="container">
+                <!-- 表格开始-->
                 <table class="table table-striped table-hover">
-                    <tr class="row">
+                <!-- 判断在请求中是否存在-->
+            <c:if test="${requestScope.pa==null }">
+			<jsp:forward page="Album.do?op=photopage"></jsp:forward>
+			</c:if>
+			 <c:if test="${requestScope.lista!=null }">
+			<tr class="row">
+                <c:forEach var="q" items="${requestScope.lista }" >
+                
+                    
                     <td class="col-sm-3">
                         <div >
                             <div class="thumbnail thumbnail_small">
                                 <a href="#" class="thumbnail__link">
-                                    <img src="img/content/news2.jpg" height="153" width="270" alt="News">
+                                    <img src="${q.coverPictureURL}" height="153" width="270" alt="News">
                                 </a>
                                 <div class="caption thumbnail__caption">
                                     <div class="news caption__news">
-                                        <p class="news__category yellow-line">物体</p>
+                                        <p class="news__category yellow-line">${q.aTitle}</p>
                                         
-                                            <p class="news__text">世界因你而精彩</p>
+                                            <p class="news__text">${q.aDescription}</p>
                                         
                                     </div>
                                     <div class="posted">
-                                        <span class="posted__date">today, 12:11</span>
+                                        <span class="posted__date">${q.createTime}</span>
                                         <ul class="posted__icon">
                                             <li>
                                                 <span>
-                                                <i class="icon-comment-empty"></i>11
+                                                <i class="icon-comment-empty"></i>${q.co}
                                             </span>
                                             </li>
                                             <li>
                                                 <span>
-                                                <i >点赞</i>1.1k
+                                                <i >点赞</i>${q.aLikes}
                                             </span>
                                             </li>
                                         </ul>
@@ -268,238 +266,53 @@
                                 </div>
                             </div>
                         </div>
-                        </td>
-                        <td class="col-sm-3">
-                        <div >
-                            <div class="thumbnail thumbnail_small">
-                                <a href="news.html" class="thumbnail__link">
-                                    <img src="img/content/news3.jpg" height="153" width="270" alt="News">
-                                </a>
-                                <div class="caption thumbnail__caption">
-                                    <div class="news caption__news">
-                                        <p class="news__category yellow-line">数字</p>
-                                        <a href="news.html" class="news__link">
-                                            <p class="news__text">渺小而伟大</p>
-                                        </a>
-                                    </div>
-                                    <div class="posted">
-                                        <span class="posted__date">today, 19:30</span>
-                                        <ul class="posted__icon">
-                                            <li>
-                                                <span>
-                                                <i class="icon-comment-empty"></i>294
-                                            </span>
-                                            </li>
-                                            <li>
-                                                <span>
-                                                <i class="icon-eye"></i>2.9k
-                                            </span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        </td>
-                        <td class="col-sm-3">
-                        <div >
-                            <div class="thumbnail thumbnail_small">
-                                <a href="news.html" class="thumbnail__link">
-                                    <img src="img/content/news4.jpg" height="153" width="270" alt="News">
-                                </a>
-                                <div class="caption thumbnail__caption">
-                                    <div class="news caption__news">
-                                        <i class="icon-play"></i>
-                                        <p class="news__category yellow-line">人们</p>
-                                        <a href="news.html" class="news__link">
-                                            <p class="news__text">一群人的狂欢,一个人的孤单</p>
-                                        </a>
-                                    </div>
-                                    <div class="posted">
-                                        <span class="posted__date">today, 2:39</span>
-                                        <ul class="posted__icon">
-                                            <li>
-                                                <span>
-                                                <i class="icon-comment-empty"></i>9
-                                            </span>
-                                            </li>
-                                            <li>
-                                                <span>
-                                                <i class="icon-eye"></i>1.3k
-                                            </span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        </td>
-                         <td class="col-sm-3">
-                        <div >
-                            <div class="thumbnail thumbnail_small">
-                                <a href="news.html" class="thumbnail__link">
-                                    <img src="img/content/news5.jpg" height="153" width="270" alt="News">
-                                </a>
-                                <div class="caption thumbnail__caption">
-                                    <div class="news caption__news">
-                                        <p class="news__category yellow-line">休闲</p>
-                                        <a href="news.html" class="news__link">
-                                            <p class="news__text">手gay真好玩</p>
-                                        </a>
-                                    </div>
-                                    <div class="posted">
-                                        <span class="posted__date">today, 14:34</span>
-                                        <ul class="posted__icon">
-                                            <li>
-                                                <span>
-                                                <i class="icon-comment-empty"></i>58
-                                            </span>
-                                            </li>
-                                            <li>
-                                                <span>
-                                                <i class="icon-eye"></i>8.8k
-                                            </span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        </td>
+                        </td>                     
+                        </c:forEach> 
+                        
                    </tr>
-                    <tr class="row">
-                     <td class="col-sm-3">
-                        <div >
-                            <div class="thumbnail thumbnail_small">
-                                <a href="news.html" class="thumbnail__link">
-                                    <img src="img/content/news6.jpg" height="153" width="270" alt="News">
-                                </a>
-                                <div class="caption thumbnail__caption">
-                                    <div class="news caption__news">
-                                        <i class="icon-play"></i>
-                                        <p class="news__category yellow-line">抽象</p>
-                                        <a href="news.html" class="news__link">
-                                            <p class="news__text">生活亦或是抽象</p>
-                                        </a>
-                                    </div>
-                                    <div class="posted">
-                                        <span class="posted__date">today, 12:37</span>
-                                        <ul class="posted__icon">
-                                            <li>
-                                                <span>
-                                                <i class="icon-comment-empty"></i>20
-                                            </span>
-                                            </li>
-                                            <li>
-                                                <span>
-                                                <i class="icon-eye"></i>1.2k
-                                            </span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        </td>
-                        <td class="col-sm-3">
-                        <div >
-                            <div class="thumbnail thumbnail_small">
-                                <a href="news.html" class="thumbnail__link">
-                                    <img src="img/content/news7.jpg" height="153" width="270" alt="News">
-                                </a>
-                                <div class="caption thumbnail__caption">
-                                    <div class="news caption__news">
-                                        <p class="news__category yellow-line">金钱</p>
-                                        <a href="news.html" class="news__link">
-                                            <p class="news__text">可能是全世界最让人有安全感的东西</p>
-                                        </a>
-                                    </div>
-                                    <div class="posted">
-                                        <span class="posted__date">today, 11:30</span>
-                                        <ul class="posted__icon">
-                                            <li>
-                                                <span>
-                                                <i class="icon-comment-empty"></i>21
-                                            </span>
-                                            </li>
-                                            <li>
-                                                <span>
-                                                <i class="icon-eye"></i>1.9k
-                                            </span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        </td>
-                        <td class="col-sm-3">
-                        <div >
-                            <div class="thumbnail thumbnail_small">
-                                <a href="news.html" class="thumbnail__link">
-                                    <img src="img/content/news8.jpg" height="153" width="270" alt="News">
-                                </a>
-                                <div class="caption thumbnail__caption">
-                                    <div class="news caption__news">
-                                        <i class="icon-play"></i>
-                                        <p class="news__category yellow-line">运动</p>
-                                        <a href="news.html" class="news__link">
-                                            <p class="news__text">好好学习,天天运动</p>
-                                        </a>
-                                    </div>
-                                    <div class="posted">
-                                        <span class="posted__date">today, 10:36</span>
-                                        <ul class="posted__icon">
-                                            <li>
-                                                <span>
-                                                <i class="icon-comment-empty"></i>17
-                                            </span>
-                                            </li>
-                                            <li>
-                                                <span>
-                                                <i class="icon-eye"></i>2.0k
-                                            </span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        </td>
-                        <td class="col-sm-3">
-                        <div >
-                            <div class="thumbnail thumbnail_small">
-                                <a href="news.html" class="thumbnail__link">
-                                    <img src="img/content/news9.jpg" height="153" width="270" alt="News">
-                                </a>
-                                <div class="caption thumbnail__caption">
-                                    <div class="news caption__news">
-                                        <p class="news__category yellow-line">工作</p>
-                                        <a href="news.html" class="news__link">
-                                            <p class="news__text">人总是要吃饭的嘛</p>
-                                        </a>
-                                    </div>
-                                    <div class="posted">
-                                        <span class="posted__date">today, 12:30</span>
-                                        <ul class="posted__icon">
-                                            <li>
-                                                <span>
-                                                <i class="icon-comment-empty"></i>29
-                                            </span>
-                                            </li>
-                                            <li>
-                                                <span>
-                                                <i class="icon-eye"></i>2.3k
-                                            </span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        </td>
-                    </tr>
+                   </c:if>
+                   
+                    <c:if test="${requestScope.listb!=null}">
+			<tr class="row">
+                <c:forEach var="q" items="${requestScope.listb }" >
+                
                     
+                    <td class="col-sm-3">
+                        <div >
+                            <div class="thumbnail thumbnail_small">
+                                <a href="#" class="thumbnail__link">
+                                    <img src="${q.coverPictureURL}" height="153" width="270" alt="News">
+                                </a>
+                                <div class="caption thumbnail__caption">
+                                    <div class="news caption__news">
+                                        <p class="news__category yellow-line">${q.aTitle}</p>
+                                        
+                                            <p class="news__text">${q.aDescription}</p>
+                                        
+                                    </div>
+                                    <div class="posted">
+                                        <span class="posted__date">${q.createTime}</span>
+                                        <ul class="posted__icon">
+                                            <li>
+                                                <span>
+                                                <i class="icon-comment-empty"></i>${q.co}
+                                            </span>
+                                            </li>
+                                            <li>
+                                                <span>
+                                                <i >点赞</i>${q.aLikes}
+                                            </span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        </td>                     
+                        </c:forEach> 
+                        
+                   </tr>
+                   </c:if>
                 </table>
                 <!-- btn load-->
                 <!-- 分页的开始 -->
@@ -531,37 +344,7 @@
 
        
         <!-- Footer -->
-        <footer class="footer slate_gray">
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-6">
-                        <p class="copyright">Copyright &copy; 2018.Company name All rights reserved.</p>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="social navbar-right">
-                            <p class="social__text">We are in social networks</p>
-                            <ul class="social__list">
-                                <li class="social__item">
-                                    <a class="facebook" href="#">
-                                        <i class="icon-facebook"></i>
-                                    </a>
-                                </li>
-                                <li class="social__item">
-                                    <a class="twitter" href="#">
-                                        <i class="icon-twitter"></i>
-                                    </a>
-                                </li>
-                                <li class="social__item">
-                                    <a class="gplus" href="#">
-                                        <i class="icon-gplus"></i>
-                                    </a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        
         <!-- END Footer -->
         <!-- All JavaScript libraries -->
 		<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>

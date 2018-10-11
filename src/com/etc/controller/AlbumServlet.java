@@ -2,6 +2,7 @@ package com.etc.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -42,6 +43,7 @@ public class AlbumServlet extends HttpServlet {
 				request.setCharacterEncoding("utf-8");
 				String op=request.getParameter("op");
 				if("photopage".equals(op)) {
+					System.out.println("111");
 					int page=1;
 					int pageSize=8;
 					//String userNameLike = "";
@@ -58,10 +60,22 @@ public class AlbumServlet extends HttpServlet {
 						//userNameLike = request.getParameter("selectlike");
 					//}
 
-					PageData<AlbumSelectBean> pag=al.doQueryAlbum(page, pageSize);
+					PageData<AlbumSelectBean> pa=al.doQueryAlbum(page, pageSize);
+					List<AlbumSelectBean> pag=pa.getData();
+					List<AlbumSelectBean> lista=new ArrayList<>();
+					List<AlbumSelectBean> listb=new ArrayList<>();
+					for (int i = 0; i < pag.size(); i++) {
+						if(i<4) {
+							lista.add(pag.get(i));
+						}else {
+							listb.add(pag.get(i));
+						}
+					}
 					
 					
-					request.setAttribute("page", pag);
+					request.setAttribute("pa", pa);
+					request.setAttribute("lista", lista);
+					request.setAttribute("listb", listb);
 					//将模糊出查询的字符串 也转发回来
 					
 
