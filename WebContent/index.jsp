@@ -94,10 +94,13 @@
                                         </li>
                                     </ul>
                                 </li>
+                                
+                                
+                                <c:if test="${sessionScope.user.uName!=mull}">
 
                                 <li>
                                     <span class="wsmenu-click"></span>
-                                    <a href="">我的
+                                    <a href="">${sessionScope.user.uName}
                                     <span class="arrow"></span>
                                 </a>
                                     <ul class="wsmenu-submenu">
@@ -108,10 +111,21 @@
                                             <a href="category.html">我的相册</a>
                                         </li>
                                         <li>
-                                            <a href="news.html">退出登录</a>
+                                            <a href="us.do?op=outlogin">退出登录</a>
                                         </li>
                                     </ul>
-                                </li> 
+                                </li>
+                                
+                                </c:if> 
+                                
+                                <c:if test="${sessionScope.user.uName==null}">
+                                
+                                 <li>
+                                            <a href="login.jsp">登录</a>
+                                        </li>
+                                
+                                
+                                </c:if>
 
 
                                 <li class="hidden-xs" style="margin-left: 10px">
