@@ -1,6 +1,7 @@
 package com.etc.entity;
 
 public class Album {
+	private int pId;
 	private int aId;
 	private String aTitle;
 	private String aDescription;
@@ -10,6 +11,37 @@ public class Album {
 	private int aLikes;
 	private int uId;
 	private int aState;
+	private String pName;
+	private String pDate;
+	private String pUrl;
+
+	
+	public int getpId() {
+		return pId;
+	}
+	public void setpId(int pId) {
+		this.pId = pId;
+	}
+
+	public String getpName() {
+		return pName;
+	}
+	public void setpName(String pName) {
+		this.pName = pName;
+	}
+	public String getpDate() {
+		return pDate;
+	}
+	public void setpDate(String pDate) {
+		this.pDate = pDate;
+	}
+	public String getpUrl() {
+		return pUrl;
+	}
+	public void setpUrl(String pUrl) {
+		this.pUrl = pUrl;
+	}
+	
 	public int getaId() {
 		return aId;
 	}
@@ -64,6 +96,8 @@ public class Album {
 	public void setaState(int aState) {
 		this.aState = aState;
 	}
+	
+	
 	public Album(int aId, String aTitle, String aDescription, int tId, String createTime, String coverPictureURL,
 			int aLikes, int uId, int aState) {
 		super();
@@ -77,15 +111,43 @@ public class Album {
 		this.uId = uId;
 		this.aState = aState;
 	}
+	
+	public Album(String pUrl) {
+		super();
+		this.pUrl = pUrl;
+	}
 	public Album() {
 		// TODO Auto-generated constructor stub
 	}
+	public Album(int pId, int aId, String aTitle, String aDescription, int tId, String createTime,
+			String coverPictureURL, int aLikes, int uId, int aState, String pName, String pDate, String pUrl) {
+		super();
+		this.pId = pId;
+		this.aId = aId;
+		this.aTitle = aTitle;
+		this.aDescription = aDescription;
+		this.tId = tId;
+		this.createTime = createTime;
+		this.coverPictureURL = coverPictureURL;
+		this.aLikes = aLikes;
+		this.uId = uId;
+		this.aState = aState;
+		this.pName = pName;
+		this.pDate = pDate;
+		this.pUrl = pUrl;
+	}
 	@Override
 	public String toString() {
-		return "Album [aId=" + aId + ", aTitle=" + aTitle + ", aDescription=" + aDescription + ", tId=" + tId
-				+ ", createTime=" + createTime + ", coverPictureURL=" + coverPictureURL + ", aLikes=" + aLikes
-				+ ", uId=" + uId + ", aState=" + aState + "]";
+		return "Album [pId=" + pId + ", aId=" + aId + ", aTitle=" + aTitle + ", aDescription=" + aDescription + ", tId="
+				+ tId + ", createTime=" + createTime + ", coverPictureURL=" + coverPictureURL + ", aLikes=" + aLikes
+				+ ", uId=" + uId + ", aState=" + aState + ", pName=" + pName + ", pDate=" + pDate + ", pUrl=" + pUrl
+				+ "]";
 	}
+	
+	
+	
+
+
 	
 	
 
