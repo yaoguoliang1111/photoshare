@@ -1,8 +1,11 @@
 package com.etc.service.impl;
 
 import java.util.ArrayList;
+import java.util.List;
+
 import com.etc.dao.impl.AlbumDaoImpl;
 import com.etc.entity.AlbumSelectBean;
+import com.etc.entity.AlbumType;
 import com.etc.service.AlbumService;
 import com.etc.util.PageData;
 ;
@@ -31,6 +34,11 @@ public class AlbumServiceImpl implements AlbumService {
 	public PageData<AlbumSelectBean> doQueryAlbumLike(int page, int pageSize, String like) {
 		// TODO Auto-generated method stub
 		return ad.queryAlbumlike(page, pageSize, like);
+	}
+	@Override
+	public List<AlbumType> doQueryAlbumType() {
+		// TODO Auto-generated method stub
+		return ad.queryAlbumType();
 	}
 	
 }

@@ -1,9 +1,9 @@
 package com.etc.service;
 
-import java.util.ArrayList;
 
+import java.util.List;
 import com.etc.entity.AlbumSelectBean;
-import com.etc.entity.User;
+import com.etc.entity.AlbumType;
 import com.etc.util.PageData;
 
 /**
@@ -18,4 +18,5 @@ public interface AlbumService {
  */
 	PageData<AlbumSelectBean> doQueryAlbum(int page, int pageSize);
 	PageData<AlbumSelectBean> doQueryAlbumLike(int page,int pageSize,String like);
+	List<AlbumType> doQueryAlbumType();
 }

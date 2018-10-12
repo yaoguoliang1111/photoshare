@@ -73,25 +73,16 @@
                                 </li>
                                 <li>
                                     <span class="wsmenu-click"></span>
-                                    <a href="">其它
+                                    <a href="">全部
         							<span class="arrow"></span>
                                 </a>
                                     <ul class="wsmenu-submenu">
                                         <li>
                                             <a href="404.html">404 page</a>
                                         </li>
-                                        <li>
-                                            <a href="category.html">Category page</a>
-                                        </li>
-                                        <li>
-                                            <a href="news.html">News page</a>
-                                        </li>
-                                        <li>
-                                            <a href="search-result.html">Search result</a>
-                                        </li>
-                                        <li>
-                                            <a href="full-width.html">Full width</a>
-                                        </li>
+                                        
+                                        
+                                        
                                     </ul>
                                 </li>
                                 
