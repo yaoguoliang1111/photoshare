@@ -27,17 +27,17 @@ public class AlbumServiceImpl implements AlbumService {
 		// TODO Auto-generated method stub
 		return ad.queryAlbum(page, pageSize);
 	}
-<<<<<<< HEAD
+
 	@Override
 	public List<Album> getAlbum(int aId) {
 		// TODO Auto-generated method stub
 		return ad.getAlbum(aId);
 	}
-=======
+
 	/**
 	 * 获取模糊查询的相册
 	 */
->>>>>>> branch 'master' of https://github.com/yaoguoliang1111/photoshare.git
+
 	
 	@Override
 	public PageData<AlbumSelectBean> doQueryAlbumLike(int page, int pageSize, String like) {

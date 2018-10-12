@@ -27,7 +27,7 @@ public class AlbumDaoImpl implements AlbumDao {
 		PageData<AlbumSelectBean> list = BaseDao.getPage(sql, page, pageSize, AlbumSelectBean.class);
 		return list;
 	}
-<<<<<<< HEAD
+
 
 	@Override
 	public List<Album> getAlbum(int aId) {
@@ -36,7 +36,7 @@ public class AlbumDaoImpl implements AlbumDao {
 		List<Album> list= (List<Album>)BaseDao.select(sql, Album.class, aId);
 		return list; 
 	}
-=======
+
 	/**
 	 * 获取模糊查询的相册
 	 */
@@ -57,5 +57,5 @@ public class AlbumDaoImpl implements AlbumDao {
 		List<AlbumType> list=(List<AlbumType>)BaseDao.select(sql, AlbumType.class);
 			return list;
 		}
->>>>>>> branch 'master' of https://github.com/yaoguoliang1111/photoshare.git
+
 }

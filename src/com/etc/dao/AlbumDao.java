@@ -3,10 +3,8 @@ package com.etc.dao;
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< HEAD
+
 import com.etc.entity.Album;
-=======
->>>>>>> branch 'master' of https://github.com/yaoguoliang1111/photoshare.git
 import com.etc.entity.AlbumSelectBean;
 import com.etc.entity.AlbumType;
 import com.etc.util.PageData;
