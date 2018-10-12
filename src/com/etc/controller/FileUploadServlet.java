@@ -98,7 +98,6 @@ public class FileUploadServlet extends HttpServlet {
 						// response);
 						out.write("ok");
 						Picture pic =new Picture(fileName, UPLOAD_DIR+fileName);
-						
 						ps.addPicture(pic);
 						System.out.println("上传成功");
 						
