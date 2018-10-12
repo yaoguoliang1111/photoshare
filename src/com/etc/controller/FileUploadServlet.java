@@ -14,33 +14,26 @@ import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 
-import com.etc.entity.Picture;
-import com.etc.service.PictureService;
-import com.etc.service.impl.PictureServiceImpl;
-
 /**
  * Servlet user to accept file upload
  */
 @WebServlet("/FileUploadServlet")
 public class FileUploadServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	PictureService ps=new PictureServiceImpl();
+
 	// private String serverPath = "e:\\images";
 	/** 上传目录名 */
-	//private static final String UPLOAD_DIR = "C:\\Users\\Administrator\\git\\photoshare\\WebContent\\img\\album\\";
-
-	private static final String UPLOAD_DIR = "img\\album\\";
+	private static final String UPLOAD_DIR = "\\img\\album\\";
 	/** 上传临时文件存储目录 */
-	//private static final String TEMP_UPLOAD_DIR = "C:\\Users\\Administrator\\git\\photoshare\\WebContent\\img\\album\\temp\\";
-
-	private static final String TEMP_UPLOAD_DIR = "img\\album\\temp\\";
-	
+	private static final String TEMP_UPLOAD_DIR = "\\img\\album\\temp\\";
 	/** 总上传文件最大为10M */
 	private static final Long TOTAL_FILE_MAXSIZE = 10000000L;
 	/** 单个上传文件最大为10M */
 	private static final int SINGLE_FILE_MAXSIZE = 2 * 1024 * 1024;
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		System.out.println("进入Servlet");
 		// 设置编码格式，前端后台统一是utf-8
 		request.setCharacterEncoding("utf-8");
@@ -60,6 +53,7 @@ public class FileUploadServlet extends HttpServlet {
 		if (!realPathFile.exists()) {
 			realPathFile.mkdirs();
 		}
+
 		// 文件对象的工厂类
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		// 设置最大上传大小
@@ -88,7 +82,6 @@ public class FileUploadServlet extends HttpServlet {
 					// 判断空
 					if (fileName != null && !"".equals(fileName)) {
 						// 将文件写到硬盘
-						//item.write(new File(realPath+fileName));
 						item.write(new File("C:\\Users\\Administrator\\git\\photoshare\\WebContent\\img\\album\\"+fileName));
 						// 将图片地址保存到request中，再转发回给jsp
 						// UPLOAD_DIR+fileName这个是相对路径，给前端页面
@@ -97,8 +90,6 @@ public class FileUploadServlet extends HttpServlet {
 						// request.getRequestDispatcher("/test/UploadTest.jsp").forward(request,
 						// response);
 						out.write("ok");
-						Picture pic =new Picture(fileName, UPLOAD_DIR+fileName);
-						ps.addPicture(pic);
 						System.out.println("上传成功");
 						
 					}
