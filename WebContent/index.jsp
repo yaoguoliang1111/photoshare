@@ -115,9 +115,10 @@
 
 
                                 <li class="hidden-xs" style="margin-left: 10px">
-                                    <form class="navbar-form" role="search">
+                                    <form class="navbar-form" role="search" action="Album.do?op=like"
+					method="post">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="搜索相册">
+                                            <input type="text" class="form-control" placeholder="搜索相册" name="photolike">
                                         </div>
                                         <button type="submit" class="btn btn-search">
                                             <i class="icon-search"></i>
