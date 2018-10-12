@@ -316,20 +316,23 @@
                 </table>
                 <!-- btn load-->
                 <!-- 分页的开始 -->
-                <nav aria-label="Page navigation" class="text-center">
-  <ul class="pagination">
+				<nav aria-label="Page navigation" class="text-center">
+  <ul class="pagination ">
     <li>
-      <a href="#" aria-label="Previous">
+      <a href="javascript:prePage()" aria-label="Previous">
         <span aria-hidden="true">&laquo;</span>
       </a>
     </li>
-    <li><a href="#">1</a></li>
-    <li><a href="#">2</a></li>
-    <li><a href="#">3</a></li>
-    <li><a href="#">4</a></li>
-    <li><a href="#">5</a></li>
+    <c:forEach begin="1" end="${requestScope.pa.totalPage}" var="index">
+    <c:if test="${requestScope.pa.page==index}">
+    <li class="active"><a href="javascript:jumpPage(${index})">${index}</a></li>
+    </c:if>
+    <c:if test="${requestScope.pa.page!=index}">
+     <li><a href="javascript:jumpPage(${index})">${index}</a></li>
+    </c:if>
+    </c:forEach> 
     <li>
-      <a href="#" aria-label="Next">
+      <a href="javascript:nextPage()" aria-label="Next">
         <span aria-hidden="true">&raquo;</span>
       </a>
     </li>
@@ -344,12 +347,62 @@
 
        
         <!-- Footer -->
-        
+        <footer class="footer slate_gray">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <p class="copyright">Copyright &copy; 2018.Company name All rights reserved.</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="social navbar-right">
+                            <p class="social__text">We are in social networks</p>
+                            <ul class="social__list">
+                                <li class="social__item">
+                                    <a class="facebook" href="#">
+                                        <i class="icon-facebook"></i>
+                                    </a>
+                                </li>
+                                <li class="social__item">
+                                    <a class="twitter" href="#">
+                                        <i class="icon-twitter"></i>
+                                    </a>
+                                </li>
+                                <li class="social__item">
+                                    <a class="gplus" href="#">
+                                        <i class="icon-gplus"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
         <!-- END Footer -->
         <!-- All JavaScript libraries -->
 		<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
 		<!-- Custom JavaScript -->
         <script src="js/main.js"></script>
+        <script type="text/javascript">
+	function prePage(){
+		var page=1;
+		if(${requestScope.pa.page}>1){
+			
+			page=${requestScope.pa.page}-1;
+		}
+		location.href="Album.do?op=photopage&page="+page;
+	}
+	function nextPage(){
+		var page=${requestScope.pa.totalPage}
+		if(${requestScope.pa.page}<${requestScope.pa.totalPage}){
+			page=${requestScope.pa.page}+1;
+		}
+		location.href="Album.do?op=photopage&page="+page;
+	}
+	function jumpPage(page){
+		location.href="Album.do?op=photopage&page="+page;
+	}
+	</script>
     </body>
 </html>
