@@ -191,7 +191,7 @@ $(function(){
 	},"请输入正确车牌号");
 });
 //身份证号码的验证规则
-function isIdCardNo(num){ 
+/*function isIdCardNo(num){ 
 　   //if (isNaN(num)) {alert("输入的不是数字！"); return false;} 
 　　 var len = num.length, re; 
 　　 if (len == 15) 
@@ -225,4 +225,4 @@ function isIdCardNo(num){
 		return false;
 	}
 　　 return true; 
-}
+}*/

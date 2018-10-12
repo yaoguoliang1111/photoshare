@@ -12,6 +12,8 @@ import java.util.List;
 
 import org.apache.commons.beanutils.BeanUtils;
 
+
+
 /**
  * 数据库操作的辅助类
  */
@@ -282,14 +284,26 @@ public class BaseDao {
 		//sql : select * from users
 		//selSql select count(1) from (select * from users) t
 		String selSql = "select count(1) from (" + sql + ") t";
-		if (page == null||page<1) {
+		if (page == null || page<1) {
 			page = 1;
 		}
-		if (pageSize == null||page<1) {
+		if (pageSize == null ||pageSize < 1) {
 			pageSize = 10;
 		}
 		//查询对应的记录数有几条
 		Integer count = Integer.parseInt(getFirst(selSql, param).toString());
+		//获取总页数
+		//int totalPage = count / pageSize;
+		// 看是否有余数 47%10
+		/*if (count % pageSize != 0) {
+			//totalPage++;
+		//}
+
+		// 如果用户传递的参数 page 已经超出总页数
+		//if (page > totalPage) {
+			// page应该为最后一页
+			//page = totalPage;
+		}*/
 		//设置【计算】 起始位置   
 		// page 1=>第一页   start =>0
 		//page 2  =>第二页   start => 10
@@ -303,6 +317,7 @@ public class BaseDao {
 		//返回值为PageData
 		return data;
 	}
+
 
 	/**
 	 * 分页操作 sqlserver

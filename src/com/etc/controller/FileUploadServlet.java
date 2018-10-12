@@ -82,7 +82,7 @@ public class FileUploadServlet extends HttpServlet {
 					// 判断空
 					if (fileName != null && !"".equals(fileName)) {
 						// 将文件写到硬盘
-						item.write(new File(realPath+fileName));
+						item.write(new File("C:\\Users\\Administrator\\git\\photoshare\\WebContent\\img\\album\\"+fileName));
 						// 将图片地址保存到request中，再转发回给jsp
 						// UPLOAD_DIR+fileName这个是相对路径，给前端页面
 						// realPath+fileName是绝对路径

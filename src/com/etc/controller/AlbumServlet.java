@@ -4,16 +4,15 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import com.etc.entity.AlbumSelectBean;
 import com.etc.service.impl.AlbumServiceImpl;
 import com.etc.util.PageData;
+
 
 /**
  * Servlet implementation class AlbumServlet
@@ -80,6 +79,31 @@ public class AlbumServlet extends HttpServlet {
 					
 
 					request.getRequestDispatcher("index.jsp").forward(request, response);//页面跳转
+				}else if("like".equals(op)) {
+					int page=1;
+					int pageSize=8;
+					String userNameLike = "";
+					if(request.getParameter("page")!=null) {
+						page=Integer.valueOf(request.getParameter("page"));
+						
+					}
+					if(request.getParameter("pageSize")!=null) {
+						pageSize=Integer.valueOf(request.getParameter("pageSize"));
+						
+					}
+					// 获取页面传递过来的userNameLike (模糊查询)参数
+					if (null != request.getParameter("photolike")) {
+						userNameLike = request.getParameter("photolike");
+					}
+
+					//PageData<Question> pag=qS.doQueryPage(page, pageSize, userNameLike);
+					
+					//request.setAttribute("page", pag);
+					//将模糊出查询的字符串 也转发回来
+					//request.setAttribute("likew", userNameLike);
+
+					//request.getRequestDispatcher("question.jsp").forward(request, response);//页面跳转
+				
 				}
 	}
 
