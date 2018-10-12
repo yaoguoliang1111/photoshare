@@ -23,6 +23,14 @@ public class AlbumServiceImpl implements AlbumService {
 		// TODO Auto-generated method stub
 		return ad.queryAlbum(page, pageSize);
 	}
+	/**
+	 * 获取模糊查询的相册
+	 */
 	
+	@Override
+	public PageData<AlbumSelectBean> doQueryAlbumLike(int page, int pageSize, String like) {
+		// TODO Auto-generated method stub
+		return ad.queryAlbumlike(page, pageSize, like);
+	}
 	
 }

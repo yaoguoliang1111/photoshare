@@ -79,7 +79,8 @@ public class AlbumServlet extends HttpServlet {
 					
 
 					request.getRequestDispatcher("index.jsp").forward(request, response);//页面跳转
-				}else if("like".equals(op)) {
+				}
+				else if("like".equals(op)) {
 					int page=1;
 					int pageSize=8;
 					String userNameLike = "";
@@ -96,13 +97,27 @@ public class AlbumServlet extends HttpServlet {
 						userNameLike = request.getParameter("photolike");
 					}
 
-					//PageData<Question> pag=qS.doQueryPage(page, pageSize, userNameLike);
+					PageData<AlbumSelectBean> pa=al.doQueryAlbumLike(page, pageSize, userNameLike);
+					List<AlbumSelectBean> pag=pa.getData();
+					List<AlbumSelectBean> lista=new ArrayList<>();
+					List<AlbumSelectBean> listb=new ArrayList<>();
+					for (int i = 0; i < pag.size(); i++) {
+						if(i<4) {
+							lista.add(pag.get(i));
+						}else {
+							listb.add(pag.get(i));
+						}
+					}
 					
-					//request.setAttribute("page", pag);
+					
+					request.setAttribute("pa", pa);
+					request.setAttribute("lista", lista);
+					request.setAttribute("listb", listb);
 					//将模糊出查询的字符串 也转发回来
-					//request.setAttribute("likew", userNameLike);
+					//将模糊出查询的字符串 也转发回来
+					request.setAttribute("likew", userNameLike);
 
-					//request.getRequestDispatcher("question.jsp").forward(request, response);//页面跳转
+					request.getRequestDispatcher("searchResult.jsp").forward(request, response);//页面跳转
 				
 				}
 	}

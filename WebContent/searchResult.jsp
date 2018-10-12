@@ -117,9 +117,10 @@
 
 
                                 <li class="hidden-xs" style="margin-left: 10px">
-                                    <form class="navbar-form" role="search">
+                                    <form class="navbar-form" role="search" action="Album.do?op=like"
+					method="post">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="搜索相册">
+                                            <input type="text" class="form-control" placeholder="搜索相册" name="photolike" id="aa" value="${requestScope.likew==null?'':requestScope.likew}">
                                         </div>
                                         <button type="submit" class="btn btn-search">
                                             <i class="icon-search"></i>
@@ -143,295 +144,124 @@
         </header>
                 <!-- END header -->
                 <!-- content-->
+                <!-- END title 相册展示开始-->
                 <div class="wrap wrap_gray pt20">
                     <div class="container">
                         <div class="row">
-                         
+                          <!-- 判断在请求中是否存在-->
+            <c:if test="${requestScope.pa==null }">
+			<jsp:forward page="Album.do?op=like"></jsp:forward>
+			</c:if>
+			<!-- 如果没有找到相关的记录页面显示没有找到相关记录 -->
+			<c:if test="${requestScope.lista==null }">
+			<h1 class="text-center">没有找到相关记录</h1>
+			</c:if>
+			<!-- 显示第一行的图片相册-->
+			<c:if test="${requestScope.lista!=null }">
+			<!-- 遍历第一行的图片相册-->
+			<c:forEach var="q" items="${requestScope.lista }" >
                             <div class="col-sm-3">
                                 <div class="thumbnail thumbnail_small">
-                                    <a href="news.html" class="thumbnail__link">
-                                        <img src="img/content/news6.jpg" height="153" width="270" alt="News">
-                                    </a>
-                                    <div class="caption thumbnail__caption">
-                                        <div class="news caption__news">
-                                            <i class="icon-play"></i>
-                                            <p class="news__category yellow-line">Economy</p>
-                                            <a href="news.html" class="news__link">
-                                                <p class="news__text">CEO who jacked up price of AIDS pill to $750 faces major backlash</p>
-                                            </a>
-                                        </div>
-                                        <div class="posted">
-                                            <span class="posted__date">today, 12:30</span>
-                                            <ul class="posted__icon">
-                                                <li>
-                                                    <span>
-                                                <i class="icon-comment-empty"></i>29
+                                <a href="#" class="thumbnail__link">
+                                    <img src="${q.coverPictureURL}" height="153" width="270" alt="News">
+                                </a>
+                                <div class="caption thumbnail__caption">
+                                    <div class="news caption__news">
+                                        <p class="news__category yellow-line">${q.aTitle}</p>
+                                        
+                                            <p class="news__text">${q.aDescription}</p>
+                                        
+                                    </div>
+                                    <div class="posted">
+                                        <span class="posted__date">${q.createTime}</span>
+                                        <ul class="posted__icon">
+                                            <li>
+                                                <span>
+                                                <i class="icon-comment-empty"></i>${q.co}
                                             </span>
-                                                </li>
-                                                <li>
-                                                    <span>
-                                                <i class="icon-eye"></i>2.3k
+                                            </li>
+                                            <li>
+                                                <span>
+                                                <i >点赞</i>${q.aLikes}
                                             </span>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
+                            </div>
+                              </c:forEach> 
+
+                   </c:if>
+                   <!-- 显示第二行的图片相册-->
+                   <c:if test="${requestScope.listb!=null }">
+                   <!-- 遍历第二行的图片相册-->
+			<c:forEach var="q" items="${requestScope.listb }">
                             <div class="col-sm-3">
                                 <div class="thumbnail thumbnail_small">
-                                    <a href="news.html" class="thumbnail__link">
-                                        <img src="img/content/news7.jpg" height="153" width="270" alt="News">
-                                    </a>
-                                    <div class="caption thumbnail__caption">
-                                        <div class="news caption__news">
-                                            <p class="news__category yellow-line">Economy</p>
-                                            <a href="news.html" class="news__link">
-                                                <p class="news__text">CEO who jacked up price of AIDS pill to $750 faces major backlash</p>
-                                            </a>
-                                        </div>
-                                        <div class="posted">
-                                            <span class="posted__date">today, 12:30</span>
-                                            <ul class="posted__icon">
-                                                <li>
-                                                    <span>
-                                                <i class="icon-comment-empty"></i>29
+                                <a href="#" class="thumbnail__link">
+                                    <img src="${q.coverPictureURL}" height="153" width="270" alt="News">
+                                </a>
+                                <div class="caption thumbnail__caption">
+                                    <div class="news caption__news">
+                                        <p class="news__category yellow-line">${q.aTitle}</p>
+                                        
+                                            <p class="news__text">${q.aDescription}</p>
+                                        
+                                    </div>
+                                    <div class="posted">
+                                        <span class="posted__date">${q.createTime}</span>
+                                        <ul class="posted__icon">
+                                            <li>
+                                                <span>
+                                                <i class="icon-comment-empty"></i>${q.co}
                                             </span>
-                                                </li>
-                                                <li>
-                                                    <span>
-                                                <i class="icon-eye"></i>2.3k
+                                            </li>
+                                            <li>
+                                                <span>
+                                                <i >点赞</i>${q.aLikes}
                                             </span>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                            </li>
+                                        </ul>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-sm-3">
-                                <div class="thumbnail thumbnail_small">
-                                    <a href="news.html" class="thumbnail__link">
-                                        <img src="img/content/news8.jpg" height="153" width="270" alt="News">
-                                    </a>
-                                    <div class="caption thumbnail__caption">
-                                        <div class="news caption__news">
-                                            <i class="icon-play"></i>
-                                            <p class="news__category yellow-line">Economy</p>
-                                            <a href="news.html" class="news__link">
-                                                <p class="news__text">CEO who jacked up price of AIDS pill to $750 faces major backlash</p>
-                                            </a>
-                                        </div>
-                                        <div class="posted">
-                                            <span class="posted__date">today, 12:30</span>
-                                            <ul class="posted__icon">
-                                                <li>
-                                                    <span>
-                                                <i class="icon-comment-empty"></i>29
-                                            </span>
-                                                </li>
-                                                <li>
-                                                    <span>
-                                                <i class="icon-eye"></i>2.3k
-                                            </span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
                             </div>
-                            <div class="col-sm-3">
-                                <div class="thumbnail thumbnail_small">
-                                    <a href="news.html" class="thumbnail__link">
-                                        <img src="img/content/news9.jpg" height="153" width="270" alt="News">
-                                    </a>
-                                    <div class="caption thumbnail__caption">
-                                        <div class="news caption__news">
-                                            <p class="news__category yellow-line">Economy</p>
-                                            <a href="news.html" class="news__link">
-                                                <p class="news__text">CEO who jacked up price of AIDS pill to $750 faces major backlash</p>
-                                            </a>
-                                        </div>
-                                        <div class="posted">
-                                            <span class="posted__date">today, 12:30</span>
-                                            <ul class="posted__icon">
-                                                <li>
-                                                    <span>
-                                                <i class="icon-comment-empty"></i>29
-                                            </span>
-                                                </li>
-                                                <li>
-                                                    <span>
-                                                <i class="icon-eye"></i>2.3k
-                                            </span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="thumbnail thumbnail_small">
-                                    <a href="news.html" class="thumbnail__link">
-                                        <img src="img/content/news10.jpg" height="153" width="270" alt="News">
-                                    </a>
-                                    <div class="caption thumbnail__caption">
-                                        <div class="news caption__news">
-                                            <p class="news__category yellow-line">Economy</p>
-                                            <a href="news.html" class="news__link">
-                                                <p class="news__text">CEO who jacked up price of AIDS pill to $750 faces major backlash</p>
-                                            </a>
-                                        </div>
-                                        <div class="posted">
-                                            <span class="posted__date">today, 12:30</span>
-                                            <ul class="posted__icon">
-                                                <li>
-                                                    <span>
-                                                <i class="icon-comment-empty"></i>29
-                                            </span>
-                                                </li>
-                                                <li>
-                                                    <span>
-                                                <i class="icon-eye"></i>2.3k
-                                            </span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="thumbnail thumbnail_small">
-                                    <a href="news.html" class="thumbnail__link">
-                                        <img src="img/content/news11.jpg" height="153" width="270" alt="News">
-                                    </a>
-                                    <div class="caption thumbnail__caption">
-                                        <div class="news caption__news">
-                                            <p class="news__category yellow-line">Economy</p>
-                                            <a href="news.html" class="news__link">
-                                                <p class="news__text">CEO who jacked up price of AIDS pill to $750 faces major backlash</p>
-                                            </a>
-                                        </div>
-                                        <div class="posted">
-                                            <span class="posted__date">today, 12:30</span>
-                                            <ul class="posted__icon">
-                                                <li>
-                                                    <span>
-                                                <i class="icon-comment-empty"></i>29
-                                            </span>
-                                                </li>
-                                                <li>
-                                                    <span>
-                                                <i class="icon-eye"></i>2.3k
-                                            </span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="thumbnail thumbnail_small">
-                                    <a href="news.html" class="thumbnail__link">
-                                        <img src="img/content/news12.jpg" height="153" width="270" alt="News">
-                                    </a>
-                                    <div class="caption thumbnail__caption">
-                                        <div class="news caption__news">
-                                            <p class="news__category yellow-line">Economy</p>
-                                            <a href="news.html" class="news__link">
-                                                <p class="news__text">CEO who jacked up price of AIDS pill to $750 faces major backlash</p>
-                                            </a>
-                                        </div>
-                                        <div class="posted">
-                                            <span class="posted__date">today, 12:30</span>
-                                            <ul class="posted__icon">
-                                                <li>
-                                                    <span>
-                                                <i class="icon-comment-empty"></i>29
-                                            </span>
-                                                </li>
-                                                <li>
-                                                    <span>
-                                                <i class="icon-eye"></i>2.3k
-                                            </span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-sm-3">
-                                <div class="thumbnail thumbnail_small">
-                                    <a href="news.html" class="thumbnail__link">
-                                        <img src="img/content/news13.jpg" height="153" width="270" alt="News">
-                                    </a>
-                                    <div class="caption thumbnail__caption">
-                                        <div class="news caption__news">
-                                            <p class="news__category yellow-line">Economy</p>
-                                            <a href="news.html" class="news__link">
-                                                <p class="news__text">CEO who jacked up price of AIDS pill to $750 faces major backlash</p>
-                                            </a>
-                                        </div>
-                                        <div class="posted">
-                                            <span class="posted__date">today, 12:30</span>
-                                            <ul class="posted__icon">
-                                                <li>
-                                                    <span>
-                                                <i class="icon-comment-empty"></i>29
-                                            </span>
-                                                </li>
-                                                <li>
-                                                    <span>
-                                                <i class="icon-eye"></i>2.3k
-                                            </span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="ajax_load">
-                        <i class="icon-arrows-cw"></i>Load more
-                        <svg width="128" height="40" viewBox="0 0 128 40" xmlns="http://www.w3.org/2000/svg">
-                            <rect x='0' y='0' fill='none' width='128' height='40'></rect>
-                        </svg>
-                    </div>
+                              </c:forEach> 
+
+                   </c:if>
+                            
                 </div>
+                
                 <!-- END content-->
+                <!-- 加入分页-->
+                <nav aria-label="Page navigation" class="text-center">
+  <ul class="pagination ">
+    <li>
+      <a href="javascript:prePage()" aria-label="Previous">
+        <span aria-hidden="true">&laquo;</span>
+      </a>
+    </li>
+    <c:forEach begin="1" end="${requestScope.pa.totalPage}" var="index">
+    <c:if test="${requestScope.pa.page==index}">
+    <li class="active"><a href="javascript:jumpPage(${index})">${index}</a></li>
+    </c:if>
+    <c:if test="${requestScope.pa.page!=index}">
+     <li><a href="javascript:jumpPage(${index})">${index}</a></li>
+    </c:if>
+    </c:forEach> 
+    <li>
+      <a href="javascript:nextPage()" aria-label="Next">
+        <span aria-hidden="true">&raquo;</span>
+      </a>
+    </li>
+  </ul>
+</nav>
+<!-- 分页的结束 -->
+                
             </div>
             <!-- Footer -->
-            <footer class="footer slate_gray">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-sm-6">
-                            <p class="copyright">Copyright &copy; 2017.Company name All rights reserved.</p>
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="social navbar-right">
-                                <p class="social__text">We are in social networks</p>
-                                <ul class="social__list">
-                                    <li class="social__item">
-                                        <a class="facebook" href="#">
-                                            <i class="icon-facebook"></i>
-                                        </a>
-                                    </li>
-                                    <li class="social__item">
-                                        <a class="twitter" href="#">
-                                            <i class="icon-twitter"></i>
-                                        </a>
-                                    </li>
-                                    <li class="social__item">
-                                        <a class="gplus" href="#">
-                                            <i class="icon-gplus"></i>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
+            
         </div>
         <!-- END Footer -->
         <!-- All JavaScript libraries -->
@@ -439,6 +269,28 @@
 		<script src="js/bootstrap.min.js"></script>
 		<!-- Custom JavaScript -->
         <script src="js/main.js"></script>
+        <!-- 分页的js代码 -->
+        <script type="text/javascript">
+	function prePage(){
+		var page=1;
+		if(${requestScope.pa.page}>1){
+			
+			page=${requestScope.pa.page}-1;
+		}
+		location.href="Album.do?op=like&page="+page+"&photolike="+document.getElementById("aa").value;
+	}
+	function nextPage(){
+		var page=${requestScope.pa.totalPage}
+		if(${requestScope.pa.page}<${requestScope.pa.totalPage}){
+			page=${requestScope.pa.page}+1;
+		}
+		location.href="Album.do?op=like&page="+page+"&photolike="+document.getElementById("aa").value;
+	}
+	function jumpPage(page){
+		location.href="Album.do?op=like&page="+page+"&photolike="+document.getElementById("aa").value;
+	}
+	</script>
+	
     </body>
 </html>
 

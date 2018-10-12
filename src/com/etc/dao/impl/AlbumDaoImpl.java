@@ -22,4 +22,11 @@ public class AlbumDaoImpl implements AlbumDao {
 		PageData<AlbumSelectBean> list=BaseDao.getPage(sql, page, pageSize, AlbumSelectBean.class);
 		return list;
 	}
+	@Override
+		public PageData<AlbumSelectBean> queryAlbumlike(int page, int pageSize, String like) {
+			// TODO Auto-generated method stub
+		String sql="SELECT album.aId ,album.aTitle ,album.aDescription ,album.createTime ,album.coverPictureURL ,album.aLikes ,count(comment.cId) as co from album left join comment on album.aId=comment.aId WHERE album.aState=1 and album.aTitle like ? GROUP BY comment.aId";
+		PageData<AlbumSelectBean> list=BaseDao.getPage(sql, page, pageSize, AlbumSelectBean.class, "%"+like+"%");
+			return list;
+		}
 }

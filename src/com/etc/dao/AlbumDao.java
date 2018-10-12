@@ -16,6 +16,7 @@ import com.etc.util.PageData;
 public interface AlbumDao {
 
 	PageData<AlbumSelectBean> queryAlbum( int page, int pageSize );
+	PageData<AlbumSelectBean> queryAlbumlike( int page,int pageSize,String like);
 	
 	
 }

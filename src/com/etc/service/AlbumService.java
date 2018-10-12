@@ -17,4 +17,5 @@ public interface AlbumService {
  * @return
  */
 	PageData<AlbumSelectBean> doQueryAlbum(int page, int pageSize);
+	PageData<AlbumSelectBean> doQueryAlbumLike(int page,int pageSize,String like);
 }

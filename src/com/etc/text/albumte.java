@@ -14,7 +14,8 @@ public class albumte {
 		AlbumServiceImpl al=new AlbumServiceImpl();
 		int page=1;
 		int pageSize=4;
-		PageData<AlbumSelectBean> pa=al.doQueryAlbum(page, pageSize);
+		String like="1";
+		PageData<AlbumSelectBean> pa=al.doQueryAlbumLike(page, pageSize, like);
 		List<AlbumSelectBean> pag=pa.getData();
 		List<AlbumSelectBean> lista=new ArrayList<>();
 		List<AlbumSelectBean> listb=new ArrayList<>();
