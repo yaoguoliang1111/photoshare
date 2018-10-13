@@ -12,9 +12,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="HandheldFriendly" content="true">
         <meta content="telephone=no" name="format-detection">
-       
+        <!-- favicon -->
+        <!-- <link rel="shortcut icon" type="image/png" href="favicon.png" /> -->
+        <!--[if (gt IE 9)|!(IE)]><!-->
+        <!-- custom CSS -->
         <link href="css/main.css" rel="stylesheet" type="text/css" />
-        
+        <!-- END custom CSS -->
+        <!--<![endif]-->
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+            <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
         <title></title>
     </head>
     <body class="page">
@@ -110,7 +120,7 @@
                                     <form class="navbar-form" role="search" action="Album.do?op=like"
 					method="post">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" placeholder="搜索相册" name="photolike" id="aa" value="${requestScope.likew==null?'':requestScope.likew}">
+                                            <input type="text" class="form-control" placeholder="搜索相册" name="photolike"  >
                                         </div>
                                         <button type="submit" class="btn btn-search">
                                             <i class="icon-search"></i>
@@ -132,21 +142,21 @@
             </div>
 
         </header>
-                <!-- END header -->
-                <!-- content-->
-                <section>
-                 <div class="wrap wrap_white">
+        <section>
+        <div class="wrap wrap_white">
                 <div class="container title">
                     <h2 class="title__h1 underscore">相册展示</h2>
                 </div>
                  </div>
+                <!-- END header -->
+                <!-- content-->
                 <!-- END title 相册展示开始-->
                 <div class="wrap wrap_gray pt20">
                     <div class="container">
                         <div class="row">
                           <!-- 判断在请求中是否存在-->
             <c:if test="${requestScope.pa==null }">
-			<jsp:forward page="Album.do?op=like"></jsp:forward>
+			<jsp:forward page="Album.do?op=altype"></jsp:forward>
 			</c:if>
 			<!-- 如果没有找到相关的记录页面显示没有找到相关记录 -->
 			<c:if test="${requestScope.lista==null }">
@@ -256,11 +266,11 @@
 <!-- 分页的结束 -->
                 
             
-            <!-- Footer -->
+           
             
         </div>
-        <section>
-        <!-- END Footer -->
+        </section>
+        
         <!-- All JavaScript libraries -->
 		<script src="http://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
 		<script src="js/bootstrap.min.js"></script>
@@ -274,17 +284,17 @@
 			
 			page=${requestScope.pa.page}-1;
 		}
-		location.href="Album.do?op=like&page="+page+"&photolike="+document.getElementById("aa").value;
+		location.href="Album.do?op=altype&page="+page;
 	}
 	function nextPage(){
 		var page=${requestScope.pa.totalPage}
 		if(${requestScope.pa.page}<${requestScope.pa.totalPage}){
 			page=${requestScope.pa.page}+1;
 		}
-		location.href="Album.do?op=like&page="+page+"&photolike="+document.getElementById("aa").value;
+		location.href="Album.do?op=altype&page="+page;
 	}
 	function jumpPage(page){
-		location.href="Album.do?op=like&page="+page+"&photolike="+document.getElementById("aa").value;
+		location.href="Album.do?op=altype&page="+page;
 	}
 	</script>
 	<!-- ajax的相册类型显示 -->
@@ -302,6 +312,7 @@
 				
 			});
 		</script>
+	
     </body>
 </html>
 

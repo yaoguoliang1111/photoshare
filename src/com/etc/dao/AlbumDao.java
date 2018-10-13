@@ -1,9 +1,7 @@
 package com.etc.dao;
 
-import java.util.ArrayList;
+
 import java.util.List;
-
-
 import com.etc.entity.Album;
 import com.etc.entity.AlbumSelectBean;
 import com.etc.entity.AlbumType;

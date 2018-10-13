@@ -12,19 +12,8 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="HandheldFriendly" content="true">
         <meta content="telephone=no" name="format-detection">
-        <!-- favicon -->
-        <!-- <link rel="shortcut icon" type="image/png" href="favicon.png" /> -->
-        <!--[if (gt IE 9)|!(IE)]><!-->
-        <!-- custom CSS -->
         <link href="css/main.css" rel="stylesheet" type="text/css" />
-        <!-- END custom CSS -->
-        <!--<![endif]-->
-        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-            <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-            <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-        <![endif]-->
+
         <title>Home</title>
     </head>
     <body>
@@ -45,53 +34,39 @@
                                 
                                 <li class="active">
                                     <span class="wsmenu-click"></span>
-                                    <a href="index.html">首页</a>
+                                    <a href="index.jsp" >首页</a>
                                 </li>
                                 <li>
                                     <span class="wsmenu-click"></span>
-                                    <a href="category.html">人像</a>
+                                    <a href="Album.do?op=altype&tId=1">人像</a>
                                 </li>
                                 <li>
                                     <span class="wsmenu-click"></span>
-                                    <a href="category.html">生活</a>
+                                    <a href="Album.do?op=altype&tId=2">生活</a>
                                 </li>
                                 <li>
                                     <span class="wsmenu-click"></span>
-                                    <a href="category.html">动物</a>
+                                    <a href="Album.do?op=altype&tId=3">动物</a>
                                 </li>
                                 <li>
                                     <span class="wsmenu-click"></span>
-                                    <a href="category.html">建筑</a>
+                                    <a href="Album.do?op=altype&tId=4">建筑</a>
                                 </li>
                                 <li>
                                     <span class="wsmenu-click"></span>
-                                    <a href="category.html">风景</a>
+                                    <a href="Album.do?op=altype&tId=5">风景</a>
                                 </li>
                                 <li>
                                     <span class="wsmenu-click"></span>
-                                    <a href="category.html">运动</a>
+                                    <a href="Album.do?op=altype&tId=6">运动</a>
                                 </li>
                                 <li>
                                     <span class="wsmenu-click"></span>
-                                    <a href="">其它
+                                    <a href="">全部
         							<span class="arrow"></span>
                                 </a>
-                                    <ul class="wsmenu-submenu">
-                                        <li>
-                                            <a href="404.html">404 page</a>
-                                        </li>
-                                        <li>
-                                            <a href="category.html">Category page</a>
-                                        </li>
-                                        <li>
-                                            <a href="news.html">News page</a>
-                                        </li>
-                                        <li>
-                                            <a href="search-result.html">Search result</a>
-                                        </li>
-                                        <li>
-                                            <a href="full-width.html">Full width</a>
-                                        </li>
+                                    <ul class="wsmenu-submenu" id="albumstyle">
+                                        
                                     </ul>
                                 </li>
                                 
@@ -419,5 +394,20 @@
 		location.href="Album.do?op=photopage&page="+page;
 	}
 	</script>
+	<!-- ajax的相册类型显示 -->
+	<script type="text/javascript">
+			$(function(){
+				$.get("Album.do?op=load",function(data){
+					var arry=JSON.parse(data);
+					$.each(arry, function(i,d) {
+						console.log(d.tName);
+						//$("#albumstyle").append("<li></li>");
+						//$("#albumstyle").find("li").eq(i).append("<a href='4'>"+d.tName+"</a>");
+						$("#albumstyle").append("<li><a href='Album.do?op=altype&tId="+d.tId+"'>"+d.tName+"</a></li>");
+					});
+				});
+				
+			});
+		</script>
     </body>
 </html>

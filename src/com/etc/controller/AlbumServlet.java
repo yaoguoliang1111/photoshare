@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.etc.entity.AlbumSelectBean;
+import com.etc.entity.AlbumType;
 import com.etc.service.impl.AlbumServiceImpl;
 import com.etc.util.PageData;
+import com.google.gson.Gson;
 
 
 /**
@@ -119,6 +121,56 @@ public class AlbumServlet extends HttpServlet {
 
 					request.getRequestDispatcher("searchResult.jsp").forward(request, response);//页面跳转
 				
+				}
+				else if("load".equals(op)) {
+					
+					List<AlbumType> aa=al.doQueryAlbumType();
+					Gson sGson=new Gson();
+					
+					String albumtype=sGson.toJson(aa);
+					
+					response.getWriter().print(albumtype);
+					
+				}
+				else if("altype".equals(op)) {
+					System.out.println("111");
+					int page=1;
+					int pageSize=8;
+					int tId=Integer.valueOf(request.getParameter("tId"));
+					//String userNameLike = "";
+					if(request.getParameter("page")!=null) {
+						page=Integer.valueOf(request.getParameter("page"));
+						
+					}
+					if(request.getParameter("pageSize")!=null) {
+						pageSize=Integer.valueOf(request.getParameter("pageSize"));
+						
+					}
+					// 获取页面传递过来的userNameLike (模糊查询)参数
+					//if (null != request.getParameter("selectlike")) {
+						//userNameLike = request.getParameter("selectlike");
+					//}
+
+					PageData<AlbumSelectBean> pa=al.doQAlbumType(page, pageSize, tId);
+					List<AlbumSelectBean> pag=pa.getData();
+					List<AlbumSelectBean> lista=new ArrayList<>();
+					List<AlbumSelectBean> listb=new ArrayList<>();
+					for (int i = 0; i < pag.size(); i++) {
+						if(i<4) {
+							lista.add(pag.get(i));
+						}else {
+							listb.add(pag.get(i));
+						}
+					}
+					
+					
+					request.setAttribute("pa", pa);
+					request.setAttribute("lista", lista);
+					request.setAttribute("listb", listb);
+					//将模糊出查询的字符串 也转发回来
+					
+
+					request.getRequestDispatcher("showType.jsp").forward(request, response);//页面跳转
 				}
 	}
 
