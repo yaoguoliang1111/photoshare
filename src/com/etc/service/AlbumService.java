@@ -30,5 +30,6 @@ public interface AlbumService {
 
 	PageData<AlbumSelectBean> doQueryAlbumLike(int page,int pageSize,String like);
 	List<AlbumType> doQueryAlbumType();
+	PageData<AlbumSelectBean> doQAlbumType(int page, int pageSize,int tId);
 
 }

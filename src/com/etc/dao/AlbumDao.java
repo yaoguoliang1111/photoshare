@@ -20,6 +20,6 @@ public interface AlbumDao {
 	PageData<AlbumSelectBean> queryAlbum( int page, int pageSize );
 	PageData<AlbumSelectBean> queryAlbumlike( int page,int pageSize,String like);
 	List<AlbumType> queryAlbumType();
-	
+	PageData<AlbumSelectBean> qAlbumType(int page, int pageSize,int tId);
 	List<Album> getAlbum(int aId);
 }

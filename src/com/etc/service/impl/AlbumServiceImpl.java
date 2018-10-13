@@ -49,5 +49,13 @@ public class AlbumServiceImpl implements AlbumService {
 		// TODO Auto-generated method stub
 		return ad.queryAlbumType();
 	}
+	/**
+	 * 通过类型获取相册
+	 */
+	@Override
+	public PageData<AlbumSelectBean> doQAlbumType(int page, int pageSize, int tId) {
+		// TODO Auto-generated method stub
+		return ad.qAlbumType(page, pageSize, tId);
+	}
 	
 }

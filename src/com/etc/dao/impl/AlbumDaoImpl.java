@@ -57,5 +57,15 @@ public class AlbumDaoImpl implements AlbumDao {
 		List<AlbumType> list=(List<AlbumType>)BaseDao.select(sql, AlbumType.class);
 			return list;
 		}
+	/**
+	 * 通过相册类型获取相册
+	 */
+	@Override
+		public PageData<AlbumSelectBean> qAlbumType(int page, int pageSize,int tId) {
+			// TODO Auto-generated method stub
+		String sql="SELECT album.aId ,album.aTitle ,album.aDescription ,album.createTime ,album.coverPictureURL ,album.aLikes ,count(comment.cId) as co from album left join comment on album.aId=comment.aId WHERE album.aState=1 and album.tId=? GROUP BY comment.aId";
+		PageData<AlbumSelectBean> list=BaseDao.getPage(sql, page, pageSize, AlbumSelectBean.class, tId);
+			return list;
+		}
 
 }
