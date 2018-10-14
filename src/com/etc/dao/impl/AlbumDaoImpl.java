@@ -1,5 +1,7 @@
 package com.etc.dao.impl;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,6 +11,7 @@ import com.etc.entity.AlbumSelectBean;
 import com.etc.entity.AlbumType;
 import com.etc.util.BaseDao;
 import com.etc.util.PageData;
+import com.etc.util.UUIDUtils;
 
 /**
  * Dao接口的实现类
@@ -67,5 +70,46 @@ public class AlbumDaoImpl implements AlbumDao {
 		PageData<AlbumSelectBean> list=BaseDao.getPage(sql, page, pageSize, AlbumSelectBean.class, tId);
 			return list;
 		}
+	
+	/**
+	 * 添加相册 （事务）
+	 */
+	@Override
+	public boolean addAlbum(Album album,String allpid) {
+		Connection conn = BaseDao.getConn();
+
+		try {
+			conn.setAutoCommit(false);
+			String [] allpid2=allpid.split(",");
+			String sql1 = "INSERT INTO album  VALUES (?,?,?,?, NOW(),?,0,?,?) ";
+			String aId=UUIDUtils.getUUID();
+			BaseDao.execute(sql1,conn,aId,album.getaTitle(),album.getaDescription(),album.gettId(),allpid2[0],album.getuId()
+			,album.getaState());
+			//记得要传递第二个参数Connection对象
+			for(int i=0;i<allpid2.length;i++) {
+			String sql2 = "INSERT INTO album_picture_relationship VALUES (?,?) ";
+			BaseDao.execute(sql2,conn,allpid2[i],aId);
+			}
+
+			//手动提交
+			conn.commit();
+			return true;
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			// 3 回滚
+			try {
+				conn.rollback();
+				System.out.println("失败~事务自动回滚~");
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+
+			e.printStackTrace();
+			return false;
+
+	}
+	}
 
 }

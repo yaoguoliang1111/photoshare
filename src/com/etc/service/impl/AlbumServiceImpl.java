@@ -58,4 +58,10 @@ public class AlbumServiceImpl implements AlbumService {
 		return ad.qAlbumType(page, pageSize, tId);
 	}
 	
+	@Override
+	public boolean addAlbum(Album album, String allpid) {
+		// TODO 自动生成的方法存根
+		return ad.addAlbum(album, allpid);
+	}
+	
 }

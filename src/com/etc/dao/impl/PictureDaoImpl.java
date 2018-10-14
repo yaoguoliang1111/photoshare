@@ -8,12 +8,8 @@ public class PictureDaoImpl implements PictureDao{
 	
 	@Override
 	public int insertPicture(Picture pic) {
-		
-		String sql="INSERT INTO picture( `pName`, `pDate`, `pUrl`) VALUES (?, NOW(), ?) ";	
-		
-		return BaseDao.execute(sql,pic.getpName(),pic.getpUrl());
-		
-		
+		String sql1 = "INSERT INTO picture(`pId`, `pName`, `pDate`, `pUrl`) VALUES (?,?, NOW(), ?) ";
+		return BaseDao.execute(sql1,pic.getpId(),pic.getpName(),pic.getpUrl());
 	}
 
 }

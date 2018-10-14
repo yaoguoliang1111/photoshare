@@ -20,4 +20,5 @@ public interface AlbumDao {
 	List<AlbumType> queryAlbumType();
 	PageData<AlbumSelectBean> qAlbumType(int page, int pageSize,int tId);
 	List<Album> getAlbum(int aId);
+	boolean addAlbum(Album album,String allpid);
 }
