@@ -123,7 +123,7 @@
                                 </li> 
 
 
-                                <li class="hidden-xs" style="margin-left: 10px">
+                                <li class="hidden-xs" >
                                     <form class="navbar-form" role="search">
                                         <div class="form-group">
                                             <input type="text" class="form-control" placeholder="搜索相册">
@@ -134,9 +134,6 @@
                                         </button>
                                     </form>
                                 </li>
-                                <button type="button" class="btn btn-success ">发布相册</button>
-                             
-
                             </ul>
 
                         </nav>
@@ -155,24 +152,26 @@
                 </div>
             </div>
 <div class="page-container">
-	<form class="form form-horizontal" id="form-article-add" >
+	<form class="form form-horizontal" id="form-album-add" action="Album.do?op=addAlbum" method="POST">
+	<input type="hidden"   id="allpid" name="allpid" >
+	
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>相册标题：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="" name="">
+				<input type="text" class="input-text"  placeholder="请输入相册标题" id="aTitle" name="aTitle">
 			</div>
 		</div>
 		
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>相册类别：</label>
+			<label class="form-label col-xs-4 col-sm-2">相册类别：</label>
 			<div class="formControls col-xs-8 col-sm-9">
 				<span class="select-box">
-				<select name="" class="select">
-					<option value="0">人像</option>
-					<option value="1">生活</option>
-					<option value="2">动物</option>
-					<option value="3">风景</option>
-					<option value="4">运动</option>
+				<select name="aType" class="select">
+					<option value="1">人像</option>
+					<option value="2">生活</option>
+					<option value="3">动物</option>
+					<option value="4">风景</option>
+					<option value="5">运动</option>
 				</select>
 				</span>
 			</div>
@@ -180,12 +179,18 @@
 		
 		
 		<div class="row cl">
-			<label class="form-label col-xs-4 col-sm-2">相册描述：</label>
+			<label class="form-label col-xs-4 col-sm-2"><span class="c-red">*</span>相册描述：</label>
 			<div class="formControls col-xs-8 col-sm-9">
-				<input type="text" class="input-text" value="" placeholder="" id="" name="">
+				<input type="text" class="input-text" value="" placeholder="请输入相册描述" id="aDetail" name="aDetail">
 			</div>
 		</div>
-
+		<div class="row cl">
+			<label class="form-label col-xs-4 col-sm-2">是否公开：</label>
+			<div class="formControls col-xs-8 col-sm-9">
+				<input type="radio"  value="1"  id="" name="aState" checked>是
+				<input type="radio"  value="0"  id="" name="aState">否
+			</div>
+		</div>
 		<div class="row cl">
 			<label class="form-label col-xs-4 col-sm-2">图片上传：</label>
 			<div class="formControls col-xs-8 col-sm-9">
@@ -209,12 +214,11 @@
 		</div>
 		<div class="row cl">
 			<div class="col-xs-8 col-sm-9 col-xs-offset-4 col-sm-offset-2">
-				<button onClick="article_save_submit();" class="btn btn-primary radius" type="submit"><i class="Hui-iconfont">&#xe632;</i>提交相册</button>
+				<button id="album_submit" class="btn btn-primary " type="button"><i class="Hui-iconfont">&#xe632;</i>提交相册</button>
 				<button onClick="layer_close();" class="btn btn-default radius" type="button">&nbsp;&nbsp;取消&nbsp;&nbsp;</button>
 			</div>
 		</div>
 	</form>
-</div>
 </div>
 
 <!--_footer 作为公共模版分离出去-->
@@ -231,115 +235,24 @@
 
 <!--请在下方写此页面业务相关的脚本-->
 <script type="text/javascript" src="lib/webuploader/0.1.5/webuploader.min.js"></script> 
-<script type="text/javascript">
-$(function(){
-	$('.skin-minimal input').iCheck({
-		checkboxClass: 'icheckbox-blue',
-		radioClass: 'iradio-blue',
-		increaseArea: '20%'
-	});
-	
-	$list = $("#fileList"),
-	$btn = $("#btn-star"),
-	state = "pending",
-	uploader;
-
-	var uploader = WebUploader.create({
-		auto: true,
-		swf: '${pageContext.request.contextPath }/js/Uploader.swf',
-	
-		// 文件接收服务端。
-		server: '${pageContext.request.contextPath }/FileUploadServlet',
-	
-		// 选择文件的按钮。可选。
-		// 内部根据当前运行是创建，可能是input元素，也可能是flash.
-		pick: '#filePicker',
-	
-		// 不压缩image, 默认如果是jpeg，文件上传前会压缩一把再上传！
-		resize: false,
-		// 只允许选择图片文件。
-		accept: {
-			title: 'Images',
-			extensions: 'gif,jpg,jpeg,bmp,png',
-			mimeTypes: 'image/*'
-		}
-	});
-	uploader.on( 'fileQueued', function( file ) {
-		var $li = $(
-			'<div id="' + file.id + '" class="item">' +
-				'<div class="pic-box"><img></div>'+
-				'<div class="info">' + file.name + '</div>' +
-				'<p class="state">等待上传...</p>'+
-			'</div>'
-		),
-		$img = $li.find('img');
-		$list.append( $li );
-	
-		// 创建缩略图
-		// 如果为非图片文件，可以不用调用此方法。
-		// thumbnailWidth x thumbnailHeight 为 100 x 100
-		uploader.makeThumb( file, function( error, src ) {
-			if ( error ) {
-				$img.replaceWith('<span>不能预览</span>');
-				return;
-			}
-	
-			$img.attr( 'src', src );
-		}, thumbnailWidth, thumbnailHeight );
-	});
-	// 文件上传过程中创建进度条实时显示。
-	uploader.on( 'uploadProgress', function( file, percentage ) {
-		var $li = $( '#'+file.id ),
-			$percent = $li.find('.progress-box .sr-only');
-	
-		// 避免重复创建
-		if ( !$percent.length ) {
-			$percent = $('<div class="progress-box"><span class="progress-bar radius"><span class="sr-only" style="width:0%"></span></span></div>').appendTo( $li ).find('.sr-only');
-		}
-		$li.find(".state").text("上传中");
-		$percent.css( 'width', percentage * 100 + '%' );
-	});
-	
-	// 文件上传成功，给item添加成功class, 用样式标记上传成功。
-	uploader.on( 'uploadSuccess', function( file ) {
-		$( '#'+file.id ).addClass('upload-state-success').find(".state").text("已上传");
-	});
-	
-	// 文件上传失败，显示上传出错。
-	uploader.on( 'uploadError', function( file ) {
-		$( '#'+file.id ).addClass('upload-state-error').find(".state").text("上传出错");
-	});
-	
-	// 完成上传完了，成功或者失败，先删除进度条。
-	uploader.on( 'uploadComplete', function( file ) {
-		$( '#'+file.id ).find('.progress-box').fadeOut();
-	});
-	uploader.on('all', function (type) {
-        if (type === 'startUpload') {
-            state = 'uploading';
-        } else if (type === 'stopUpload') {
-            state = 'paused';
-        } else if (type === 'uploadFinished') {
-            state = 'done';
-        }
-
-        if (state === 'uploading') {
-            $btn.text('暂停上传');
-        } else {
-            $btn.text('开始上传');
-        }
-    });
-
-    $btn.on('click', function () {
-        if (state === 'uploading') {
-            uploader.stop();
-        } else {
-            uploader.upload();
-        }
-    });
-
+<script>
+    $('#album_submit').click(function(){
+    	
+    	if($.trim($("#aTitle").val()).length>0&&$.trim($("#aDetail").val()).length>0&&$.trim($("#allpid").val()).length>0){
+    		$("#form-album-add").submit();
+    	}
+    	if($.trim($("#aTitle").val()).length==0||$.trim($("#aDetail").val()).length==0){
+            alert( '请先填写必填信息后提交' );
+            return false;
+    	}
+    	if($.trim($("#allpid").val()).length==0){
+            alert( '请先上传图片后提交' );
+            return false;
+    	}
+    	
 });
-
+</script>
+<script type="text/javascript">
 (function( $ ){
     // 当domReady的时候开始初始化
     $(function() {
@@ -395,7 +308,7 @@ $(function(){
             } )(),
 
             // 检测是否已经安装flash，检测flash的版本
-            flashVersion = ( function() {
+            flashVersion = ( function() { 
                 var version;
 
                 try {
@@ -427,58 +340,6 @@ $(function(){
             // WebUploader实例
             uploader;
 
-        if ( !WebUploader.Uploader.support('flash') && WebUploader.browser.ie ) {
-
-            // flash 安装了但是版本过低。
-            if (flashVersion) {
-                (function(container) {
-                    window['expressinstallcallback'] = function( state ) {
-                        switch(state) {
-                            case 'Download.Cancelled':
-                                alert('您取消了更新！')
-                                break;
-
-                            case 'Download.Failed':
-                                alert('安装失败')
-                                break;
-
-                            default:
-                                alert('安装已成功，请刷新！');
-                                break;
-                        }
-                        delete window['expressinstallcallback'];
-                    };
-
-                    var swf = 'expressInstall.swf';
-                    // insert flash object
-                    var html = '<object type="application/' +
-                            'x-shockwave-flash" data="' +  swf + '" ';
-
-                    if (WebUploader.browser.ie) {
-                        html += 'classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" ';
-                    }
-
-                    html += 'width="100%" height="100%" style="outline:0">'  +
-                        '<param name="movie" value="' + swf + '" />' +
-                        '<param name="wmode" value="transparent" />' +
-                        '<param name="allowscriptaccess" value="always" />' +
-                    '</object>';
-
-                    container.html(html);
-
-                })($wrap);
-
-            // 压根就没有安转。
-            } else {
-                $wrap.html('<a href="http://www.adobe.com/go/getflashplayer" target="_blank" border="0"><img alt="get flash player" src="http://www.adobe.com/macromedia/style_guide/images/160x41_Get_Flash_Player.jpg" /></a>');
-            }
-
-            return;
-        } else if (!WebUploader.Uploader.support()) {
-            alert( 'Web Uploader 不支持您的浏览器！');
-            return;
-        }
-
         // 实例化
         uploader = WebUploader.create({
             pick: {
@@ -496,11 +357,11 @@ $(function(){
             server: '${pageContext.request.contextPath }/FileUploadServlet',
             // runtimeOrder: 'flash',
 
-            // accept: {
-            //     title: 'Images',
-            //     extensions: 'gif,jpg,jpeg,bmp,png',
-            //     mimeTypes: 'image/*'
-            // },
+            accept: {
+                 title: 'Images',
+                 extensions: 'gif,jpg,jpeg,bmp,png',
+                 mimeTypes: 'image/*'
+            },
 
             // 禁掉全局的拖拽功能。这样不会出现图片拖进页面的时候，把图片打开。
             disableGlobalDnd: true,
@@ -532,6 +393,14 @@ $(function(){
             console.log('here');
         });
 
+        
+        uploader.on( 'uploadAccept', function( file, response ) {
+        	var pDate = JSON.parse(response._raw);
+        	console.log(pDate.pId);
+        	$("#allpid").val($("#allpid").val()+pDate.pId+",");
+        	
+
+        });
         // uploader.on('filesQueued', function() {
         //     uploader.sort(function( a, b ) {
         //         if ( a.name < b.name )
@@ -603,7 +472,7 @@ $(function(){
                         img = $('<img src="'+src+'">');
                         $wrap.empty().append( img );
                     } else {
-                        $.ajax('lib/webuploader/0.1.5/server/preview.php', {
+                        $.ajax('${pageContext.request.contextPath }/FileUploadServlet', {
                             method: 'POST',
                             data: src,
                             dataType:'json'
