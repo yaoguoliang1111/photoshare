@@ -2,27 +2,23 @@ package com.etc.entity;
 
 public class Picture {
 
-private int pId;
+private String pId;
 private String pName;
 private String pDate;
 private String pUrl;
 
-public Picture(String pName, String pUrl) {
-	super();
-	this.pName = pName;
-	this.pUrl = pUrl;
-}
+
 
 @Override
 public String toString() {
 	return "Picture [pId=" + pId + ", pName=" + pName + ", pDate=" + pDate + ", pUrl=" + pUrl + "]";
 }
 
-public int getpId() {
+public String getpId() {
 	return pId;
 }
 
-public void setpId(int pId) {
+public void setpId(String pId) {
 	this.pId = pId;
 }
 
@@ -52,11 +48,10 @@ public void setpUrl(String pUrl) {
 public Picture() {
 	// TODO Auto-generated constructor stub
 }
-public Picture(int pId, String pName, String pDate, String pUrl) {
+public Picture(String pId, String pName, String pUrl) {
 	super();
 	this.pId = pId;
 	this.pName = pName;
-	this.pDate = pDate;
 	this.pUrl = pUrl;
 }
 	

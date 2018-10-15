@@ -9,6 +9,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.etc.entity.Album;
 import com.etc.entity.AlbumSelectBean;
 import com.etc.entity.AlbumType;
 import com.etc.service.impl.AlbumServiceImpl;
@@ -162,15 +164,21 @@ public class AlbumServlet extends HttpServlet {
 							listb.add(pag.get(i));
 						}
 					}
-					
-					
 					request.setAttribute("pa", pa);
 					request.setAttribute("lista", lista);
 					request.setAttribute("listb", listb);
 					//将模糊出查询的字符串 也转发回来
-					
-
 					request.getRequestDispatcher("showType.jsp").forward(request, response);//页面跳转
+				}
+				else if("addAlbum".equals(op)) {
+				String aTitle=request.getParameter("aTitle");
+				String aType=request.getParameter("aType");
+				String aDescription=request.getParameter("aDetail");
+				String allpid=request.getParameter("allpid");
+			
+				Album album =new Album(aTitle, aDescription,Integer.parseInt(aType), 1, 1);
+				al.addAlbum(album, allpid);
+				System.out.println("添加成功");
 				}
 	}
 

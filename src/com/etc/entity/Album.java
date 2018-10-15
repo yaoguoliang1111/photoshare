@@ -1,25 +1,34 @@
 package com.etc.entity;
 
 public class Album {
-	private int pId;
-	private int aId;
+	private String pId;
+	private String aId;
 	private String aTitle;
 	private String aDescription;
 	private int tId;
 	private String createTime;
-	private String coverPictureURL;
+	private String coverPId;
 	private int aLikes;
 	private int uId;
 	private int aState;
 	private String pName;
 	private String pDate;
 	private String pUrl;
-
 	
-	public int getpId() {
+	
+	public Album(String aTitle, String aDescription, int tId, int uId,int aState) {
+		super();
+		this.aTitle = aTitle;
+		this.aDescription = aDescription;
+		this.tId = tId;
+		this.uId = uId;
+		this.aState = aState;
+
+	}
+	public String getpId() {
 		return pId;
 	}
-	public void setpId(int pId) {
+	public void setpId(String pId) {
 		this.pId = pId;
 	}
 
@@ -42,10 +51,10 @@ public class Album {
 		this.pUrl = pUrl;
 	}
 	
-	public int getaId() {
+	public String getaId() {
 		return aId;
 	}
-	public void setaId(int aId) {
+	public void setaId(String aId) {
 		this.aId = aId;
 	}
 	public String getaTitle() {
@@ -72,11 +81,11 @@ public class Album {
 	public void setCreateTime(String createTime) {
 		this.createTime = createTime;
 	}
-	public String getCoverPictureURL() {
-		return coverPictureURL;
+	public String getcoverPId() {
+		return coverPId;
 	}
-	public void setCoverPictureURL(String coverPictureURL) {
-		this.coverPictureURL = coverPictureURL;
+	public void setcoverPIdURL(String coverPId) {
+		this.coverPId = coverPId;
 	}
 	public int getaLikes() {
 		return aLikes;
@@ -98,7 +107,7 @@ public class Album {
 	}
 	
 	
-	public Album(int aId, String aTitle, String aDescription, int tId, String createTime, String coverPictureURL,
+	public Album(String aId, String aTitle, String aDescription, int tId, String createTime, String coverPId,
 			int aLikes, int uId, int aState) {
 		super();
 		this.aId = aId;
@@ -106,7 +115,7 @@ public class Album {
 		this.aDescription = aDescription;
 		this.tId = tId;
 		this.createTime = createTime;
-		this.coverPictureURL = coverPictureURL;
+		this.coverPId = coverPId;
 		this.aLikes = aLikes;
 		this.uId = uId;
 		this.aState = aState;
@@ -119,8 +128,8 @@ public class Album {
 	public Album() {
 		// TODO Auto-generated constructor stub
 	}
-	public Album(int pId, int aId, String aTitle, String aDescription, int tId, String createTime,
-			String coverPictureURL, int aLikes, int uId, int aState, String pName, String pDate, String pUrl) {
+	public Album(String pId, String aId, String aTitle, String aDescription, int tId, String createTime,
+			String coverPId, int aLikes, int uId, int aState, String pName, String pDate, String pUrl) {
 		super();
 		this.pId = pId;
 		this.aId = aId;
@@ -128,7 +137,7 @@ public class Album {
 		this.aDescription = aDescription;
 		this.tId = tId;
 		this.createTime = createTime;
-		this.coverPictureURL = coverPictureURL;
+		this.coverPId = coverPId;
 		this.aLikes = aLikes;
 		this.uId = uId;
 		this.aState = aState;
@@ -139,7 +148,7 @@ public class Album {
 	@Override
 	public String toString() {
 		return "Album [pId=" + pId + ", aId=" + aId + ", aTitle=" + aTitle + ", aDescription=" + aDescription + ", tId="
-				+ tId + ", createTime=" + createTime + ", coverPictureURL=" + coverPictureURL + ", aLikes=" + aLikes
+				+ tId + ", createTime=" + createTime + ", coverPId=" + coverPId + ", aLikes=" + aLikes
 				+ ", uId=" + uId + ", aState=" + aState + ", pName=" + pName + ", pDate=" + pDate + ", pUrl=" + pUrl
 				+ "]";
 	}
