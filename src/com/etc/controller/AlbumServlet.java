@@ -174,8 +174,7 @@ public class AlbumServlet extends HttpServlet {
 				String aTitle=request.getParameter("aTitle");
 				String aType=request.getParameter("aType");
 				String aDescription=request.getParameter("aDetail");
-				String allpid=request.getParameter("allpid");
-			
+				String allpid=request.getParameter("allpid");			
 				Album album =new Album(aTitle, aDescription,Integer.parseInt(aType), 1, 1);
 				al.addAlbum(album, allpid);
 				System.out.println("添加成功");
