@@ -157,6 +157,8 @@ public class AlbumServlet extends HttpServlet {
 					List<AlbumSelectBean> pag=pa.getData();
 					List<AlbumSelectBean> lista=new ArrayList<>();
 					List<AlbumSelectBean> listb=new ArrayList<>();
+					
+					
 					for (int i = 0; i < pag.size(); i++) {
 						if(i<4) {
 							lista.add(pag.get(i));
@@ -164,6 +166,7 @@ public class AlbumServlet extends HttpServlet {
 							listb.add(pag.get(i));
 						}
 					}
+					
 					request.setAttribute("pa", pa);
 					request.setAttribute("lista", lista);
 					request.setAttribute("listb", listb);
@@ -180,6 +183,14 @@ public class AlbumServlet extends HttpServlet {
 				al.addAlbum(album, allpid);
 				System.out.println("添加成功");
 				}
+				else if("likeGruop".equals(op)) {
+					//获取点赞前四名的相册
+					List<AlbumSelectBean> likeList=al.doQueryLike();
+					request.setAttribute("likeList",likeList);
+					request.getRequestDispatcher("index.jsp").forward(request, response);//页面跳转
+				}
+					
+				
 	}
 
 	/**
