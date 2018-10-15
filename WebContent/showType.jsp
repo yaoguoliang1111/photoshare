@@ -2,6 +2,7 @@
     pageEncoding="utf-8"%>
 <%@ page autoFlush="true" buffer="1094kb"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html lang="zxx">
     <head>
@@ -159,8 +160,8 @@
 			<jsp:forward page="Album.do?op=altype"></jsp:forward>
 			</c:if>
 			<!-- 如果没有找到相关的记录页面显示没有找到相关记录 -->
-			<c:if test="${requestScope.lista==null }">
-			<h1 class="text-center">没有找到相关记录</h1>
+			<c:if test="${fn:length(lista)==0 }">
+			<h1 class="text-center">没有找到相关的记录</h1>
 			</c:if>
 			<!-- 显示第一行的图片相册-->
 			<c:if test="${requestScope.lista!=null }">
@@ -169,7 +170,7 @@
                             <div class="col-sm-3">
                                 <div class="thumbnail thumbnail_small">
                                 <a href="#" class="thumbnail__link">
-                                    <img src="${q.coverPictureURL}" height="153" width="270" alt="News">
+                                    <img src="${q.pUrl}" height="153" width="270" alt="News">
                                 </a>
                                 <div class="caption thumbnail__caption">
                                     <div class="news caption__news">
@@ -206,7 +207,7 @@
                             <div class="col-sm-3">
                                 <div class="thumbnail thumbnail_small">
                                 <a href="#" class="thumbnail__link">
-                                    <img src="${q.coverPictureURL}" height="153" width="270" alt="News">
+                                    <img src="${q.pUrl}" height="153" width="270" alt="News">
                                 </a>
                                 <div class="caption thumbnail__caption">
                                     <div class="news caption__news">

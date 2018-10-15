@@ -172,6 +172,9 @@
 					<option value="3">动物</option>
 					<option value="4">风景</option>
 					<option value="5">运动</option>
+					<option value="6">明星</option>
+					<option value="7">篮球</option>
+					<option value="8">学校</option>
 				</select>
 				</span>
 			</div>

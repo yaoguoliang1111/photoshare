@@ -6,9 +6,9 @@ public class AlbumSelectBean {
 	private String aDescription;
 	
 	private String createTime;
-	private String coverPictureURL;
+	private String pUrl;
 	private int aLikes;
-	private int aId;
+	private String  aId;
 	
 	private int co;//评论数量
 	
@@ -40,12 +40,12 @@ public class AlbumSelectBean {
 		this.createTime = createTime;
 	}
 
-	public String getCoverPictureURL() {
-		return coverPictureURL;
+	public String getpUrl() {
+		return pUrl;
 	}
 
-	public void setCoverPictureURL(String coverPictureURL) {
-		this.coverPictureURL = coverPictureURL;
+	public void setpUrl(String pUrl) {
+		this.pUrl = pUrl;
 	}
 
 	public int getaLikes() {
@@ -56,11 +56,11 @@ public class AlbumSelectBean {
 		this.aLikes = aLikes;
 	}
 
-	public int getaId() {
+	public String getaId() {
 		return aId;
 	}
 
-	public void setaId(int aId) {
+	public void setaId(String aId) {
 		this.aId = aId;
 	}
 
@@ -72,13 +72,13 @@ public class AlbumSelectBean {
 		this.co = co;
 	}
 
-	public AlbumSelectBean(String aTitle, String aDescription, String createTime, String coverPictureURL, int aLikes,
-			int aId, int co) {
+	public AlbumSelectBean(String aTitle, String aDescription, String createTime, String pUrl, int aLikes, String aId,
+			int co) {
 		super();
 		this.aTitle = aTitle;
 		this.aDescription = aDescription;
 		this.createTime = createTime;
-		this.coverPictureURL = coverPictureURL;
+		this.pUrl = pUrl;
 		this.aLikes = aLikes;
 		this.aId = aId;
 		this.co = co;
@@ -87,8 +87,9 @@ public class AlbumSelectBean {
 	@Override
 	public String toString() {
 		return "AlbumSelectBean [aTitle=" + aTitle + ", aDescription=" + aDescription + ", createTime=" + createTime
-				+ ", coverPictureURL=" + coverPictureURL + ", aLikes=" + aLikes + ", aId=" + aId + ", co=" + co + "]";
+				+ ", pUrl=" + pUrl + ", aLikes=" + aLikes + ", aId=" + aId + ", co=" + co + "]";
 	}
+
 	
 
 	

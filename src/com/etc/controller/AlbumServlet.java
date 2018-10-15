@@ -179,6 +179,14 @@ public class AlbumServlet extends HttpServlet {
 				al.addAlbum(album, allpid);
 				System.out.println("添加成功");
 				}
+				else if("likeGruop".equals(op)) {
+					//获取点赞前四名的相册
+					List<AlbumSelectBean> likeList=al.doQueryLike();
+					request.setAttribute("likeList",likeList);
+					request.getRequestDispatcher("index.jsp").forward(request, response);//页面跳转
+				}
+					
+				
 	}
 
 	/**

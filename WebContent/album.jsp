@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@page import="com.etc.service.impl.AlbumServiceImpl"%>
 <%@page import="com.etc.service.AlbumService"%>
+<%@page import="com.etc.entity.AlbumComment"%>
 <%@page import="com.etc.entity.Album"%>
 <%@page import="java.util.List"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -208,14 +209,36 @@
 						<li><a href="full-width.html">Full width</a></li>
 					</ul></li>
 
-				<li><span class="wsmenu-click"></span> <a href="">我的 <span
-						class="arrow"></span>
-				</a>
-					<ul class="wsmenu-submenu">
-						<li><a href="404.html">个人信息</a></li>
-						<li><a href="picture-list.html">我的相册</a></li>
-						<li><a href="news.html">退出登录</a></li>
-					</ul></li>
+					<c:if test="${sessionScope.user.uName!=mull}">
+
+                                <li>
+                                    <span class="wsmenu-click"></span>
+                                    <a href="">${sessionScope.user.uName}
+                                    <span class="arrow"></span>
+                                </a>
+                                    <ul class="wsmenu-submenu">
+                                        <li>
+                                            <a href="404.html">个人信息</a>
+                                        </li>
+                                        <li>
+                                            <a href="category.html">我的相册</a>
+                                        </li>
+                                        <li>
+                                            <a href="us.do?op=outlogin">退出登录</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                
+                                </c:if> 
+                                
+                                <c:if test="${sessionScope.user.uName==null}">
+                                
+                                 <li>
+                                            <a href="login.jsp">登录</a>
+                                        </li>
+                                
+                                
+                                </c:if>
 
 
 				<li class="hidden-xs" style="margin-left: 10px">
@@ -301,55 +324,41 @@
 		<div class="row">
 
 
-
-			<div class="col-sm-12 col-md-9 tags">
-				<p>标签:</p>
-				<ul>
-					<li><a href="#" title="World" class="font">World</a></li>
-					<li><a class="font" href="#" title="Sport">Sport</a></li>
-					<li><a href="#" title="Cats" class="font">Cats</a></li>
-				</ul>
-			</div>
 			<div class="col-sm-9 col-md-8 col-lg-6 comments">
 				<p class="comments__title">评论</p>
+				
+					<%
+			
+			List<AlbumComment> listc = (List<AlbumComment>) request.getAttribute("listc");
+								
+			for (AlbumComment c : listc) {
+				
+				%>
+				
 				<div class="comments__media">
 					<div class="media-middle">
 						<i class="media-object"
 							style="background-image: url('img/content/comment.png')"></i>
 						<div class="comm_info">
-							<h4 class="media-heading">Maria</h4>
-							<span class="time">today, 12:30</span>
+							<h4 class="media-heading"><%=c.getuName()%></h4>
+							<span class="time"><%=c.getcDate()%></span>
 						</div>
 					</div>
-					<p class="media-body">还行嗷,加油吧小老弟.</p>
+					<p class="media-body"><%=c.getcContent()%>.</p>
 				</div>
-				<div class="comments__media">
-					<div class="media-middle">
-						<i class="media-object"
-							style="background-image: url('img/content/comment.png')"></i>
-						<div class="comm_info">
-							<h4 class="media-heading">Lisa</h4>
-							<span class="time">today, 12:30</span>
-						</div>
-					</div>
-					<p class="media-body">大杨觉得你拍的很赞.</p>
-				</div>
-				<div class="comments__media">
-					<div class="media-middle">
-						<i class="media-object"
-							style="background-image: url('img/content/comment.png')"></i>
-						<div class="comm_info">
-							<h4 class="media-heading">Maria</h4>
-							<span class="time">today, 12:30</span>
-						</div>
-					</div>
-					<p class="media-body">你来厦门中软,准没你好果汁吃嗷.</p>
-				</div>
+				<div>
+				<%
+					}
+				%> 
+				<br/>
+				<br/>
 
 				<div class="comments__form">
-					<form action="#" method="POST">
-
+					<form action="ai.do?op=addComment" method="POST" >
+						
 						<div class="form-group">
+						<input type="hidden" name="uId" id="uId" value=${sessionScope.user.uId}/>
+						<input type="hidden" name="aId" id="aId" value=<%=request.getAttribute("aId")%>/>
 							<textarea name="text" id="input" class="form-control" rows="7"
 								required="required"></textarea>
 						</div>
