@@ -29,4 +29,30 @@ public class UserDaoImpl implements UserDao {
 			return null;
 		}
 	}
+	
+	@Override
+	public User findName(String uName) {
+		// TODO Auto-generated method stub
+		
+		String sql = "SELECT uName FROM  user where uName=?";
+		
+		List<User> list =(List<User>)BaseDao.select(sql, User.class, uName);
+		
+		if(list.size()>0) {
+			
+			return list.get(0);
+		}else {
+			
+			return null;
+		}
+	}
+	
+	@Override
+	public boolean addUser(User user) {
+		// TODO Auto-generated method stub
+	
+		String sql = "INSERT INTO user (uName,uPwd,uSex,uTel) VALUES (?,?,?,?)";
+	    int row = BaseDao.execute(sql, user.getuName(),user.getuPwd(),user.getuSex(),user.getuTel());
+	    return row > 0;
+	}
 }

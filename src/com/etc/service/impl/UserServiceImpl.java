@@ -23,4 +23,16 @@ public class UserServiceImpl implements UserService {
 		return ud.findUser(uName, uPwd);
 		
 	}
+	
+	@Override
+	public User regCheckName(String uName) {
+		// TODO Auto-generated method stub
+		return ud.findName(uName);
+	}
+	
+	@Override
+	public boolean regUser(User user) {
+		// TODO Auto-generated method stub
+		return ud.addUser(user);
+	}
 }
