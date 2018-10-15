@@ -16,4 +16,17 @@ public interface UserDao {
 	 * @return
 	 */
 	User findUser(String uName,String uPwd);
+	
+	/**
+	 * 注册时查找有没有此用户名
+	 * @param uName用户名
+	 * @return
+	 */
+	User findName(String uName);
+	/**
+	 * 添加用户（注册）
+	 * @param user
+	 * @return
+	 */
+	boolean addUser(User user);
 }

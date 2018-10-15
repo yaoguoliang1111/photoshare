@@ -16,4 +16,18 @@ public interface UserService {
 	 * @return
 	 */
 	User loginUser(String uName , String uPwd);
+	
+	/**
+	 * 注册时验证用户名
+	 * @param uName
+	 * @return
+	 */
+	User regCheckName(String uName);
+	
+	/**
+	 * 注册用户
+	 * @param user
+	 * @return
+	 */
+	boolean regUser(User user);
 }
