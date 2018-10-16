@@ -64,6 +64,8 @@ public class UserServlet extends HttpServlet {
 			// 获取登录表单的文本信息
 			String uName = request.getParameter("username");
 			String uPwd = request.getParameter("password");
+			
+			String remember = request.getParameter("remember");
 
 			/*
 			 * 校验验证码 1.从session中获取正取的验证码 2.从表单中获取用户填写的验证码 3.进行比较
@@ -79,6 +81,7 @@ public class UserServlet extends HttpServlet {
 			if (u == null) {
 
 				out.println("<script>alert('账号或密码错误，登录失败！');location.href='login.jsp'</script>");
+				
 			} else if (!paramCode.equalsIgnoreCase(sessionCode)) {
 				/*
 				 * request.setAttribute("msg", "验证码错误！");
@@ -89,9 +92,29 @@ public class UserServlet extends HttpServlet {
 				return;// 返回，不继续执行下面的语句。
 			}else {
 				
-				request.getSession().setAttribute("user", u);
+				if (remember != null) {
+					Cookie c1 = new Cookie("username", uName);
+					Cookie c2 = new Cookie("password", uPwd);
+					c1.setMaxAge(1000);
+					c2.setMaxAge(1000);//这里设置保存这条Cookie的时间
+					response.addCookie(c1);//添加Cookie
+					response.addCookie(c2);
+					
+					// 登录成功后将用户信息存入session
+					request.getSession().setAttribute("user", u);
+					
+					out.println("<script>alert('登录成功,已记住用户名');location.href='index.jsp'</script></script>");
+				} else {
+					
+					// 登录成功后将用户信息存入session
+					request.getSession().setAttribute("user", u);
+					
+					out.println("<script>alert('登录成功,没有记住用户名');location.href='index.jsp'</script>");
+				}
+				
+				/*request.getSession().setAttribute("user", u);
 
-				out.print("<script>alert('登录成功');location.href='index.jsp'</script>");
+				out.print("<script>alert('登录成功');location.href='index.jsp'</script>");*/
 			}
 			
 			
@@ -131,6 +154,54 @@ public class UserServlet extends HttpServlet {
 				
 				out.print("<script>alert('注册失败');location.href='reg.jsp'</script>");
 			}
+			
+		}
+		else if ("updatePwd".equals(op)) {
+			
+			// 获取要修改的密码
+			String confirmpwd = request.getParameter("confirmpwd");
+			String uPwd = MD5Util.getEncodeByMd5(confirmpwd);
+			
+			// 找到保存到session中的登录用户
+			User user = (User) request.getSession().getAttribute("user");
+			
+			String uName = user.getuName();
+			
+			// 调用Service里修改密码的方法
+			boolean flag = us.updatePwd(uPwd, uName);
+			
+			if(flag) {
+				
+				out.print("<script>alert('密码修改成功，去登录');location.href='login.jsp'</script>");
+			}else {
+				
+				out.print("<script>alert('密码修改失败');location.href='updatePwd.jsp'</script>");
+			}
+			
+		}else if("updateUserInfo".equals(op)) {
+			
+			// 获取请求参数
+			String uName = request.getParameter("uName");
+			String uTel = request.getParameter("tel");
+			String uSex = request.getParameter("sex");
+			
+			// 找到保存到session中的登录用户
+			User user = (User) request.getSession().getAttribute("user");
+			int uId = user.getuId();
+			
+			User u = new User(uId, uName, uSex, uTel);
+			
+			boolean flag = us.updateUser(u);
+			
+			if (flag) {
+				
+				out.print("<script>alert('用户个人信息修改成功,去重新登录后刷新');location.href='login.jsp'</script>");
+				
+			}else {
+				
+				out.print("<script>alert('用户信息修改失败!');location.href='userInfo.jsp'</script>");
+			}
+			
 			
 		}
 	 

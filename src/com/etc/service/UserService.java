@@ -30,4 +30,19 @@ public interface UserService {
 	 * @return
 	 */
 	boolean regUser(User user);
+	
+	/**
+	 * 根据用户名修改密码
+	 * @param uPwd
+	 * @param uName
+	 * @return
+	 */
+	boolean updatePwd(String uPwd,String uName);
+	
+	/**
+	 * 修改用户信息
+	 * @param user
+	 * @return
+	 */
+	boolean updateUser(User user);
 }

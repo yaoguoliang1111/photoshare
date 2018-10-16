@@ -55,4 +55,19 @@ public class UserDaoImpl implements UserDao {
 	    int row = BaseDao.execute(sql, user.getuName(),user.getuPwd(),user.getuSex(),user.getuTel());
 	    return row > 0;
 	}
+	
+	@Override
+	public boolean upPwd(String uPwd, String uName) {
+		// TODO Auto-generated method stub
+		String sql = "UPDATE user SET uPwd = ? WHERE uName = ?";
+		
+		return  BaseDao.execute(sql, uPwd,uName) > 0;
+	}
+	
+	@Override
+	public boolean upUser(User user) {
+		// TODO Auto-generated method stub
+		String sql = "UPDATE user SET uName = ?,uSex=?,uTel=? WHERE uId = ?";
+		return BaseDao.execute(sql, user.getuName(),user.getuSex(),user.getuTel(),user.getuId()) > 0;
+	}
 }

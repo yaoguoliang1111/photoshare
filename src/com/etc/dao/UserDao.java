@@ -29,4 +29,19 @@ public interface UserDao {
 	 * @return
 	 */
 	boolean addUser(User user);
+	
+	/**
+	 * 根据用户名修改密码
+	 * @param uPwd
+	 * @param uName
+	 * @return
+	 */
+	boolean upPwd(String uPwd,String uName);
+	
+	/**
+	 * 修改用户信息
+	 * @param user
+	 * @return
+	 */
+	boolean upUser(User user);
 }

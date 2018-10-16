@@ -66,6 +66,13 @@ public class User {
 		this.uSex = uSex;
 		this.uTel = uTel;
 	}
+	public User(int uId, String uName, String uSex, String uTel) {
+		super();
+		this.uId = uId;
+		this.uName = uName;
+		this.uSex = uSex;
+		this.uTel = uTel;
+	}
 	
 	
 	

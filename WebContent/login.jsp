@@ -21,8 +21,25 @@
 </head>
 <body class="style-2">
 
+<%
+		String username = "";
+		String password = "";
+		Cookie[] c = request.getCookies();
+		if (c != null) {
+			for (int i = 0; i < c.length; i++) {
+				if ("username".equals(c[i].getName())) {
+					username = c[i].getValue();
+				} else if ("password".equals(c[i].getName())) {
+					password = c[i].getValue();
+				}
+			}
+		} else {
+			username = " ";
+			password = " ";
+		}
+	%>
 
-	
+
 
 	<div class="container">
 
@@ -38,12 +55,13 @@
 					<div class="form-group">
 						<label for="username" class="sr-only">Username</label> <input
 							type="text" class="form-control" id="username" name="username"
-							placeholder="昵称" autocomplete="off" value="">
+							placeholder="昵称" autocomplete="off" value="<%=username%>">
 					</div>
+
 					<div class="form-group">
 						<label for="password" class="sr-only">Password</label> <input
 							type="password" class="form-control" id="password"
-							name="password" placeholder="密码" autocomplete="off" value="">
+							name="password" placeholder="密码" autocomplete="off" value="<%=password%>" >
 					</div>
 
 					<div class="form-group">
@@ -60,7 +78,7 @@
 
 					<div class="form-group">
 						<label for="remember"><input type="checkbox" id="remember"
-							name="remember" value="remember"> 记住密码</label>
+							name="remember" value="remember"> 记住我</label>
 					</div>
 					<div class="form-group">
 						<p>
