@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.etc.dao.impl.AlbumDaoImpl;
 import com.etc.entity.Album;
+import com.etc.entity.AlbumComment;
 import com.etc.entity.AlbumSelectBean;
 import com.etc.entity.AlbumType;
 import com.etc.service.AlbumService;
@@ -28,11 +29,6 @@ public class AlbumServiceImpl implements AlbumService {
 		return ad.queryAlbum(page, pageSize);
 	}
 
-	@Override
-	public List<Album> getAlbum(int aId) {
-		// TODO Auto-generated method stub
-		return ad.getAlbum(aId);
-	}
 
 	/**
 	 * 获取模糊查询的相册
@@ -62,6 +58,36 @@ public class AlbumServiceImpl implements AlbumService {
 	public boolean addAlbum(Album album, String allpid) {
 		// TODO 自动生成的方法存根
 		return ad.addAlbum(album, allpid);
+	}
+	/**
+	 * 获取点赞排行前四名的相册
+	 */
+	@Override
+	public List<AlbumSelectBean> doQueryLike() {
+		// TODO Auto-generated method stub
+		
+		return ad.queryLike();
+	}
+
+	
+	@Override
+	public List<Album> getAlbum(String aId) {
+		// TODO Auto-generated method stub
+		return ad.getAlbum(aId);
+	}
+
+
+	@Override
+	public List<AlbumComment> getAlbumComment(String aId) {
+		// TODO Auto-generated method stub
+		return ad.queryAlbumComment(aId);
+	}
+
+
+	@Override
+	public boolean addComment(String aId, String Comment, int uId) {
+		// TODO Auto-generated method stub
+		return ad.addComment(aId,Comment,uId);
 	}
 	
 }

@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.etc.entity.Album;
+import com.etc.entity.AlbumComment;
 import com.etc.service.AlbumService;
 import com.etc.service.impl.AlbumServiceImpl;
 
@@ -42,11 +43,26 @@ public class AlbumIndexServlet extends HttpServlet {
 		String op=request.getParameter("op");
 		
 		//从相册展示页面中获取相册id
-		System.out.println("进入servlet~");
-		int aId = 1;
-		List<Album> list=as.getAlbum(aId);
-		request.setAttribute("list", list);
-		request.getRequestDispatcher("album.jsp").forward(request, response);
+		
+		
+		if("albumIndex".equals(op)) {
+			//获取相册照片详情
+			String aId = request.getParameter("aId");
+			List<Album> list=as.getAlbum(aId);
+			request.setAttribute("list", list);
+			//获取相册评论详情
+			List<AlbumComment> listc=as.getAlbumComment(aId);
+			request.setAttribute("listc", listc);
+			request.setAttribute("aId", aId);
+			request.getRequestDispatcher("album.jsp").forward(request, response);
+		}
+		
+		if("addComment".equals(op)) {
+			String aId=request.getParameter("aId");
+			String Comment=request.getParameter("text");
+			//int uId=request.getParameter("uId");
+			//boolean flag=as.addComment(aId, Comment, uId);
+		}
 		
 	}
 
