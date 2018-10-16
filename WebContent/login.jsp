@@ -32,7 +32,7 @@
 
 				<!-- 登录表单开始 -->
 				<form action="us.do" class="fh5co-form animate-box"
-					data-animate-effect="fadeInLeft">
+					data-animate-effect="fadeInLeft" method="post">
 					<h2>登录</h2>
 					<input type="hidden" name="op" value="login">
 					<div class="form-group">

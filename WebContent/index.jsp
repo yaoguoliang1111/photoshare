@@ -90,6 +90,9 @@
                                         <li>
                                             <a href="us.do?op=outlogin">退出登录</a>
                                         </li>
+                                        <li>
+                                        	<a href="us.do?op=addAlbum">发布相册</a>	
+                                        </li>
                                     </ul>
                                 </li>
                                 
@@ -117,10 +120,7 @@
                                         </button>
                                     </form>
                                 </li>
-                                <button type="button" class="btn btn-success "><a href="#">发布相册</a></button>
-                              
-
-                            </ul>
+							 </ul>
 
                         </nav>
 
@@ -149,7 +149,7 @@
                             <img src="${q.pUrl}" alt="main img" class="tab-pane__img">
                             <div class="header_news_text tab-pane__block">
                                 <p class="tab-pane__category yel_line">${q.aTitle}</p>
-                                <a href="ai.do?op=alumbIndex&aId=${q.aId}" class="tab-pane__title">${q.aDescription}</a>	
+                                <a href="ai.do?op=albumIndex&aId=${q.aId}" class="tab-pane__title">${q.aDescription}</a>	
                                 
                             </div>
                         </div>
@@ -159,7 +159,7 @@
                             <img src="${q.pUrl}" alt="main img" class="tab-pane__img">
                             <div class="header_news_text tab-pane__block">
                                 <p class="tab-pane__category yel_line">${q.aTitle}</p>
-                                <a href="ai.do?op=alumbIndex&aId=${q.aId}" class="tab-pane__title">${q.aDescription}</a>
+                                <a href="ai.do?op=albumIndex&aId=${q.aId}" class="tab-pane__title">${q.aDescription}</a>
                                 
                             </div>
 						</div>
@@ -232,7 +232,7 @@
                     <td class="col-sm-3">
                         <div >
                             <div class="thumbnail thumbnail_small">
-                                <a href="#" class="thumbnail__link">
+                                <a href="ai.do?op=albumIndex&aId=${q.aId}" class="thumbnail__link">
                                     <img src="${q.pUrl}" height="153" width="270" alt="News">
                                 </a>
                                 <div class="caption thumbnail__caption">
@@ -267,14 +267,14 @@
                    </c:if>
                    
                     <c:if test="${requestScope.listb!=null}">
-			<tr class="row">
-                <c:forEach var="q" items="${requestScope.listb }" >
+			        <tr class="row">
+                    <c:forEach var="q" items="${requestScope.listb }" >
                 
                     
                     <td class="col-sm-3">
                         <div >
                             <div class="thumbnail thumbnail_small">
-                                <a href="#" class="thumbnail__link">
+                                <a href="ai.do?op=albumIndex&aId=${q.aId}" class="thumbnail__link">
                                     <img src="${q.pUrl}" height="153" width="270" alt="News">
                                 </a>
                                 <div class="caption thumbnail__caption">

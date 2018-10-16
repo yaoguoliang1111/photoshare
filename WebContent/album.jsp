@@ -161,112 +161,95 @@
 }
 </style>
 </head>
-<header id="header" class="header">
-<div class="wsmenucontent overlapblackbg"></div>
-<div class="wsmenuexpandermain slideRight">
-	<a id="navToggle" class="animated-arrow slideLeft"> <span></span>
-	</a>
-</div>
-<div class="header_down">
-	<div class="container">
-		<div class="wrapper clearfix bigmegamenu">
-			<!--Main Menu HTML Code-->
-			<nav class="wsmenu slideLeft clearfix">
-			<ul class="mobile-sub wsmenu-list">
-				<li class="visible-xs">
-					<form class="navbar-form mob_search" role="search">
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="Search">
-						</div>
-						<button type="submit" class="btn btn-search">
-							<i class="icon-search"></i>
-						</button>
-					</form>
-				</li>
-
-				<li class="active"><span class="wsmenu-click"></span> <a
-					href="index.html">首页</a></li>
-				<li><span class="wsmenu-click"></span> <a href="category.html">人像</a>
-				</li>
-				<li><span class="wsmenu-click"></span> <a href="category.html">生活</a>
-				</li>
-				<li><span class="wsmenu-click"></span> <a href="category.html">动物</a>
-				</li>
-				<li><span class="wsmenu-click"></span> <a href="category.html">建筑</a>
-				</li>
-				<li><span class="wsmenu-click"></span> <a href="category.html">风景</a>
-				</li>
-				<li><span class="wsmenu-click"></span> <a href="category.html">运动</a>
-				</li>
-				<li><span class="wsmenu-click"></span> <a href="">其它 <span
-						class="arrow"></span>
-				</a>
-					<ul class="wsmenu-submenu">
-						<li><a href="404.html">404 page</a></li>
-						<li><a href="category.html">Category page</a></li>
-						<li><a href="news.html">News page</a></li>
-						<li><a href="search-result.html">Search result</a></li>
-						<li><a href="full-width.html">Full width</a></li>
-					</ul></li>
-
-					<c:if test="${sessionScope.user.uName!=mull}">
-
+<body>
+<!-- Header -->
+        <header id="header" class="header">
+            <div class="wsmenucontent overlapblackbg"></div>
+            <div class="wsmenuexpandermain slideRight">
+                <a id="navToggle" class="animated-arrow slideLeft">
+                    <span></span>
+                </a>
+            </div>
+            <div class="header_down">
+                <div class="container">
+                    <div class="wrapper clearfix bigmegamenu">
+                        <!--Main Menu HTML Code-->
+                        <nav class="wsmenu slideLeft clearfix">
+                            <ul class="mobile-sub wsmenu-list">
+                                
+                                <li class="active">
+                                    <span class="wsmenu-click"></span>
+                                    <a href="index.jsp" >首页</a>
+                                </li>
                                 <li>
                                     <span class="wsmenu-click"></span>
-                                    <a href="">${sessionScope.user.uName}
-                                    <span class="arrow"></span>
+                                    <a href="Album.do?op=altype&tId=1">人像</a>
+                                </li>
+                                <li>
+                                    <span class="wsmenu-click"></span>
+                                    <a href="Album.do?op=altype&tId=2">生活</a>
+                                </li>
+                                <li>
+                                    <span class="wsmenu-click"></span>
+                                    <a href="Album.do?op=altype&tId=3">动物</a>
+                                </li>
+                                <li>
+                                    <span class="wsmenu-click"></span>
+                                    <a href="Album.do?op=altype&tId=4">建筑</a>
+                                </li>
+                                <li>
+                                    <span class="wsmenu-click"></span>
+                                    <a href="Album.do?op=altype&tId=5">风景</a>
+                                </li>
+                                <li>
+                                    <span class="wsmenu-click"></span>
+                                    <a href="Album.do?op=altype&tId=6">运动</a>
+                                </li>
+                                <li>
+                                    <span class="wsmenu-click"></span>
+                                    <a href="">全部
+        							<span class="arrow"></span>
                                 </a>
-                                    <ul class="wsmenu-submenu">
-                                        <li>
-                                            <a href="404.html">个人信息</a>
-                                        </li>
-                                        <li>
-                                            <a href="category.html">我的相册</a>
-                                        </li>
-                                        <li>
-                                            <a href="us.do?op=outlogin">退出登录</a>
-                                        </li>
+                                    <ul class="wsmenu-submenu" id="albumstyle">
+                                        
                                     </ul>
                                 </li>
                                 
-                                </c:if> 
+                                
+                               
                                 
                                 <c:if test="${sessionScope.user.uName==null}">
                                 
-                                 <li>
-                                            <a href="login.jsp">登录</a>
-                                        </li>
+                                 	<li>
+                                       <a href="login.jsp">登录</a>
+                                 	</li>
                                 
-                                
-                                </c:if>
+								</c:if>
 
 
-				<li class="hidden-xs" style="margin-left: 10px">
-					<form class="navbar-form" role="search">
-						<div class="form-group">
-							<input type="text" class="form-control" placeholder="搜索相册">
-						</div>
-						<button type="submit" class="btn btn-search">
-							<i class="icon-search"></i> <br />搜索
-						</button>
-					</form>
-				</li>
-				<button type="button" class="btn btn-success ">发布相册</button>
+                                <li class="hidden-xs" style="margin-left: 10px">
+                                    <form class="navbar-form" role="search" action="Album.do?op=like"method="post">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="搜索相册" name="photolike">
+                                        </div>
+                                        <button type="submit" class="btn btn-search">
+                                            <i class="icon-search"></i>
+                                            <br/>搜索
+                                        </button>
+                                    </form>
+                                </li>
+							 </ul>
 
+                        </nav>
 
-			</ul>
+                        <!--Menu HTML Code-->
+                    </div>
+                </div>
 
-			</nav>
+            </div>
 
-			<!--Menu HTML Code-->
-		</div>
-	</div>
+        </header>
 
-</div>
-</header>
-
-
-<body>
 	<!-- header slider -->
 	<div id="jssor_1"
 		style="position: relative; margin: 0 auto; top: 20px; left: 0px; width: 800px; height: 456px; overflow: hidden; visibility: hidden; background-color: #24262e;">
@@ -724,10 +707,22 @@
 		});
 	</script>
 
-	<div style="text-align: center; clear: both">
-		<script src="/gg_bd_ad_720x90.js" type="text/javascript"></script>
-		<script src="/follow.js" type="text/javascript"></script>
-	</div>
+	
+	<!-- ajax的相册类型显示 -->
+	<script type="text/javascript">
+			$(function(){
+				$.get("Album.do?op=load",function(data){
+					var arry=JSON.parse(data);
+					$.each(arry, function(i,d) {
+						console.log(d.tName);
+						//$("#albumstyle").append("<li></li>");
+						//$("#albumstyle").find("li").eq(i).append("<a href='4'>"+d.tName+"</a>");
+						$("#albumstyle").append("<li><a href='Album.do?op=altype&tId="+d.tId+"'>"+d.tName+"</a></li>");
+					});
+				});
+				
+			});
+		</script>
 </body>
 </html>
 
