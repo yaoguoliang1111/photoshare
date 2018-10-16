@@ -12,9 +12,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="HandheldFriendly" content="true">
         <meta content="telephone=no" name="format-detection">
+         <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
         <link href="css/main.css" rel="stylesheet" type="text/css" />
-
+        
         <title>Home</title>
+
     </head>
     <body>
         <!-- Header -->
@@ -88,6 +90,9 @@
                                         <li>
                                             <a href="us.do?op=outlogin">退出登录</a>
                                         </li>
+                                        <li>
+                                        	<a href="us.do?op=addAlbum">发布相册</a>	
+                                        </li>
                                     </ul>
                                 </li>
                                 
@@ -115,10 +120,7 @@
                                         </button>
                                     </form>
                                 </li>
-                                <button type="button" class="btn btn-success "><a href="#">发布相册</a></button>
-                              
-
-                            </ul>
+							 </ul>
 
                         </nav>
 
@@ -135,65 +137,65 @@
             <div class="container">
                 <div class="row header_news_panel">
                     <!-- Tab panes -->
-                    <div class="col-sm-8 tab-content tab-content_mob-p0">
-                        <div role="tabpanel" class="tab-pane fade in active" id="home">
-                            <img src="img/content/slide1.jpg" alt="main img" class="tab-pane__img">
+             <div class="col-sm-8 tab-content tab-content_mob-p0">
+            <!-- 判断在请求中是否存在-->
+            <c:if test="${requestScope.likeList==null }">
+			<jsp:forward page="Album.do?op=likeGruop"></jsp:forward>
+			</c:if>
+			<c:forEach var="q" items="${requestScope.likeList }" varStatus="idx">
+			<c:choose>
+			<c:when test="${idx.index==0}">
+                        <div role="tabpanel" class="tab-pane fade in active" id="${idx.index}">
+                            <img src="${q.pUrl}" alt="main img" class="tab-pane__img">
                             <div class="header_news_text tab-pane__block">
-                                <p class="tab-pane__category yel_line">人像</p>
-                                <a class="tab-pane__title">做最真实的自己</a>
-                                <p class="tab-pane__text">享受美好生活</p>
+                                <p class="tab-pane__category yel_line">${q.aTitle}</p>
+                                <a href="ai.do?op=albumIndex&aId=${q.aId}" class="tab-pane__title">${q.aDescription}</a>	
+                                
                             </div>
                         </div>
-                        <div role="tabpanel" class="tab-pane fade" id="profile">
-                            <img src="img/content/slide2.jpg" alt="main img" class="tab-pane__img">
+                        </c:when>
+                        <c:otherwise>
+                        <div role="tabpanel" class="tab-pane fade" id="${idx.index}">
+                            <img src="${q.pUrl}" alt="main img" class="tab-pane__img">
                             <div class="header_news_text tab-pane__block">
-                                <p class="tab-pane__category yel_line">People</p>
-                                <a class="tab-pane__title">The Visions's Rainbow</a>
-                                <p class="tab-pane__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                                <p class="tab-pane__category yel_line">${q.aTitle}</p>
+                                <a href="ai.do?op=albumIndex&aId=${q.aId}" class="tab-pane__title">${q.aDescription}</a>
+                                
                             </div>
-                        </div>
-                        <div role="tabpanel" class="tab-pane fade" id="messages">
-                            <img src="img/content/slide1.jpg" alt="main img" class="tab-pane__img">
-                            <div class="header_news_text tab-pane__block">
-                                <p class="tab-pane__category yel_line">People</p>
-                                <a class="tab-pane__title">The Visions's Rainbow</a>
-                                <p class="tab-pane__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            </div>
-                        </div>
-                        <div role="tabpanel" class="tab-pane fade" id="settings">
-                            <img src="img/content/slide2.jpg" alt="main img" class="tab-pane__img">
-                            <div class="header_news_text tab-pane__block">
-                                <p class="tab-pane__category yel_line">People</p>
-                                <a class="tab-pane__title">The Visions's Rainbow</a>
-                                <p class="tab-pane__text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
-                            </div>
-                        </div>
+						</div>
+                        </c:otherwise>
+                        </c:choose>
+                        
+                        </c:forEach> 
+                        
+                        
+                      
                     </div>
                     <!-- END Tab panes -->
                     <!-- Nav tabs -->
                     <div class="col-sm-4 news-tabs">
-                        <p class="news-tabs__title h2">分享美好瞬间</p>
+                        <p class="news-tabs__title h2">点赞排行</p>
+                        
                         <ul class="news-tabs__nav nav nav-tabs shadow_text" role="tablist">
+                        <c:forEach var="q" items="${requestScope.likeList }" varStatus="idx">
+			             <c:choose>
+			             <c:when test="${idx.index==0}">
                             <li role="presentation" class="active">
-                                <a href="#home" role="tab" data-toggle="tab">
-                                   汇聚全球高端视觉内容。
+                                <a href="#${idx.index}" role="tab" data-toggle="tab">
+                                  ${q.aTitle}
                                 </a>
                             </li>
+                             </c:when>
+                        <c:otherwise>
                             <li role="presentation">
-                                <a href="#profile" role="tab" data-toggle="tab">
-                                    XX，陪你做生活的设计师。
+                                <a href="#${idx.index}" role="tab" data-toggle="tab">
+                                    ${q.aTitle}
                                 </a>
                             </li>
-                            <li role="presentation">
-                                <a href="#messages" role="tab" data-toggle="tab">
-                                    XX,使用世界前沿的人工智能技术,为用户甄选海量的高清美图,用更流畅、更快捷、更精准的搜索体验,带你去发现多彩的世界。
-                                </a>
-                            </li>
-                            <li role="presentation">
-                                <a href="#settings" role="tab" data-toggle="tab">
-                                    让任何一个用户都能轻松找到自己想要的素材。
-                                </a>
-                            </li>
+                             </c:otherwise>
+                        </c:choose>
+                        
+                        </c:forEach>
                         </ul>
                     </div>
                     <!-- END Nav tabs -->
@@ -220,16 +222,18 @@
             <c:if test="${requestScope.pa==null }">
 			<jsp:forward page="Album.do?op=photopage"></jsp:forward>
 			</c:if>
+			
 			 <c:if test="${requestScope.lista!=null }">
 			<tr class="row">
+			
                 <c:forEach var="q" items="${requestScope.lista }" >
                 
                     
                     <td class="col-sm-3">
                         <div >
                             <div class="thumbnail thumbnail_small">
-                                <a href="#" class="thumbnail__link">
-                                    <img src="${q.coverPictureURL}" height="153" width="270" alt="News">
+                                <a href="ai.do?op=albumIndex&aId=${q.aId}" class="thumbnail__link">
+                                    <img src="${q.pUrl}" height="153" width="270" alt="News">
                                 </a>
                                 <div class="caption thumbnail__caption">
                                     <div class="news caption__news">
@@ -248,7 +252,7 @@
                                             </li>
                                             <li>
                                                 <span>
-                                                <i >点赞</i>${q.aLikes}
+                                                <i class=""><span class="glyphicon glyphicon-heart" aria-hidden="true"></span></i>${q.aLikes}
                                             </span>
                                             </li>
                                         </ul>
@@ -263,15 +267,15 @@
                    </c:if>
                    
                     <c:if test="${requestScope.listb!=null}">
-			<tr class="row">
-                <c:forEach var="q" items="${requestScope.listb }" >
+			        <tr class="row">
+                    <c:forEach var="q" items="${requestScope.listb }" >
                 
                     
                     <td class="col-sm-3">
                         <div >
                             <div class="thumbnail thumbnail_small">
-                                <a href="#" class="thumbnail__link">
-                                    <img src="${q.coverPictureURL}" height="153" width="270" alt="News">
+                                <a href="ai.do?op=albumIndex&aId=${q.aId}" class="thumbnail__link">
+                                    <img src="${q.pUrl}" height="153" width="270" alt="News">
                                 </a>
                                 <div class="caption thumbnail__caption">
                                     <div class="news caption__news">
