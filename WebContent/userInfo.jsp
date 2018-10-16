@@ -181,7 +181,11 @@
 				</div>
 				<div>
 				
-					<button id="" type="submit" class="btn btn-primary btn-sm">修改个人信息</button>
+					<button id="" type="submit" class="btn btn-primary btn-sm">提交修改</button>
+					
+					<div style="color: red">
+					<h5>个人信息修改后须重新登录!</h5>
+					</div>
 					<!-- <button id="reset" type="button">重置</button> -->
 					<a  href="updatePwd.jsp" role="button"
 						class="btn btn-primary btn-sm">修改密码</a>
